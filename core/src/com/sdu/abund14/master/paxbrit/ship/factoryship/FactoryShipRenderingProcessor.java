@@ -25,8 +25,11 @@ public class FactoryShipRenderingProcessor implements Processor {
     private void init() {
         batch = new SpriteBatch();
         sprites = new LinkedList<Sprite>();
+        createSprites();
+        setStartPositions(GameSettings.numPlayers);
+    }
 
-        //Create sprites
+    private void createSprites() {
         p1factory = new Sprite(new Texture(Gdx.files.internal("factoryp1.png")));
         p2factory = new Sprite(new Texture(Gdx.files.internal("factoryp2.png")));
         p1factory.setOrigin(p1factory.getWidth() / 2, p1factory.getHeight() / 2);
@@ -43,17 +46,18 @@ public class FactoryShipRenderingProcessor implements Processor {
             p4factory.setOrigin(p4factory.getWidth() / 2, p4factory.getHeight() / 2);
             sprites.add(p4factory);
         }
+    }
 
-        //Starting positions
+    private void setStartPositions(int numPlayers) {
         p1factory.setOriginBasedPosition(middleWidth() - RADIUS, middleHeight()); //Left
         p1factory.setRotation(270);
-        switch (GameSettings.numPlayers) {
+        switch (numPlayers) {
             case 2:
                 p2factory.setOriginBasedPosition(middleWidth() + RADIUS, middleHeight()); //Right
                 p2factory.setRotation(90);
                 break;
 
-            case 3: //FIXME
+            case 3:
                 //Three ships are placed with 120 degrees between them on the circle
                 p2factory.setOriginBasedPosition(
                         (float) (middleWidth() + (Math.cos(Math.toRadians(60)) * RADIUS)),
@@ -81,7 +85,6 @@ public class FactoryShipRenderingProcessor implements Processor {
                 Gdx.app.exit();
                 break;
         }
-
     }
 
     @Override
