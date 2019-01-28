@@ -4,7 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
-import com.sdu.abund14.master.paxbrit.ship.factoryship.FactoryShipRenderingProcessor;
+import com.sdu.abund14.master.paxbrit.processor.FactoryShipRenderingProcessor;
 
 import java.util.LinkedList;
 import java.util.List;

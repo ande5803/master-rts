@@ -1,10 +1,11 @@
-package com.sdu.abund14.master.paxbrit.ship.factoryship;
+package com.sdu.abund14.master.paxbrit.processor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sdu.abund14.master.paxbrit.GameSettings;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
+import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,51 +14,52 @@ public class FactoryShipRenderingProcessor implements Processor {
 
     private static final float RADIUS = 200;
     private static final float SHIP_SPEED = 3;
+    private static final int LEFT = 0;
+    private static final int UP = 90;
+    private static final int RIGHT = 180;
+    private static final int DOWN = 270;
 
     private SpriteBatch batch;
     private FactoryShip p1factory;
     private FactoryShip p2factory;
     private FactoryShip p3factory;
     private FactoryShip p4factory;
-    private List<Sprite> sprites;
+    private List<FactoryShip> ships;
 
     private void init() {
         batch = new SpriteBatch();
-        sprites = new LinkedList<Sprite>();
+        ships = new LinkedList<FactoryShip>();
         createSprites();
         setStartPositions(GameSettings.numPlayers);
     }
 
     private void createSprites() {
-        p1factory = new FactoryShip("factoryp1.png");
-        p2factory = new FactoryShip("factoryp2.png");
-        p1factory.setOrigin(p1factory.getWidth() / 2, p1factory.getHeight() / 2);
-        p2factory.setOrigin(p2factory.getWidth() / 2, p2factory.getHeight() / 2);
-        sprites.add(p1factory);
-        sprites.add(p2factory);
+        p1factory = new FactoryShip("factoryp1");
+        p2factory = new FactoryShip("factoryp2");
+        ships.add(p1factory);
+        ships.add(p2factory);
         if (GameSettings.numPlayers > 2) {
-            p3factory = new FactoryShip("factoryp3.png");
-            p3factory.setOrigin(p3factory.getWidth() / 2, p3factory.getHeight() / 2);
-            sprites.add(p3factory);
+            p3factory = new FactoryShip("factoryp3");
+            ships.add(p3factory);
         }
         if (GameSettings.numPlayers > 3) {
-            p4factory = new FactoryShip("factoryp4.png");
-            p4factory.setOrigin(p4factory.getWidth() / 2, p4factory.getHeight() / 2);
-            sprites.add(p4factory);
+            p4factory = new FactoryShip("factoryp4");
+            ships.add(p4factory);
         }
     }
 
     private void setStartPositions(int numPlayers) {
         p1factory.setOriginBasedPosition(middleWidth() - RADIUS, middleHeight()); //Left
-        p1factory.setRotation(270);
+        p1factory.setRotation(DOWN);
         switch (numPlayers) {
             case 2:
                 p2factory.setOriginBasedPosition(middleWidth() + RADIUS, middleHeight()); //Right
-                p2factory.setRotation(90);
+                p2factory.setRotation(UP);
                 break;
 
             case 3:
                 //Three ships are placed with 120 degrees between them on the circle
+                //TODO: (some of) This code might be generalised to apply to any number of players
                 p2factory.setOriginBasedPosition(
                         (float) (middleWidth() + (Math.cos(Math.toRadians(60)) * RADIUS)),
                         (float) (middleHeight() - (Math.sin(Math.toRadians(60)) * RADIUS))
@@ -72,11 +74,11 @@ public class FactoryShipRenderingProcessor implements Processor {
 
             case 4:
                 p2factory.setOriginBasedPosition(middleWidth(), middleHeight() + RADIUS); //Top
-                p2factory.setRotation(180);
+                p2factory.setRotation(RIGHT);
                 p3factory.setOriginBasedPosition(middleWidth() + RADIUS, middleHeight()); //Right
-                p3factory.setRotation(90);
+                p3factory.setRotation(UP);
                 p4factory.setOriginBasedPosition(middleWidth(), middleHeight() - RADIUS); //Bottom
-                p4factory.setRotation(0);
+                p4factory.setRotation(LEFT);
                 break;
 
             default:
@@ -103,7 +105,7 @@ public class FactoryShipRenderingProcessor implements Processor {
 
     private void tick() {
         float delta = Gdx.graphics.getDeltaTime();
-        for (Sprite sprite : sprites) {
+        for (Sprite sprite : ships) {
             //Add and subtract 90 degrees to point ships toward circle perimeter while rotating
             float newAngle = sprite.getRotation() + (SHIP_SPEED * delta) - 90;
             sprite.setRotation(newAngle + 90);

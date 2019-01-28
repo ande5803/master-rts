@@ -1,0 +1,34 @@
+
+packhigh.png
+size: 1024,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+factoryp1
+  rotate: false
+  xy: 2, 2
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+factoryp2
+  rotate: false
+  xy: 184, 2
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+factoryp3
+  rotate: false
+  xy: 366, 2
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+factoryp4
+  rotate: false
+  xy: 548, 2
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
