@@ -1,7 +1,6 @@
 package com.sdu.abund14.master.paxbrit.processor;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sdu.abund14.master.paxbrit.GameSettings;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
@@ -34,16 +33,16 @@ public class FactoryShipRenderingProcessor implements Processor {
     }
 
     private void createSprites() {
-        p1factory = new FactoryShip("factoryp1");
-        p2factory = new FactoryShip("factoryp2");
+        p1factory = new FactoryShip("factoryp1", true);
+        p2factory = new FactoryShip("factoryp2", false);
         ships.add(p1factory);
         ships.add(p2factory);
         if (GameSettings.numPlayers > 2) {
-            p3factory = new FactoryShip("factoryp3");
+            p3factory = new FactoryShip("factoryp3", false);
             ships.add(p3factory);
         }
         if (GameSettings.numPlayers > 3) {
-            p4factory = new FactoryShip("factoryp4");
+            p4factory = new FactoryShip("factoryp4", false);
             ships.add(p4factory);
         }
     }
@@ -59,7 +58,7 @@ public class FactoryShipRenderingProcessor implements Processor {
 
             case 3:
                 //Three ships are placed with 120 degrees between them on the circle
-                //TODO: (some of) This code might be generalised to apply to any number of players
+                //TODO: This code might be generalised to apply to any number of players
                 p2factory.setOriginBasedPosition(
                         (float) (middleWidth() + (Math.cos(Math.toRadians(60)) * RADIUS)),
                         (float) (middleHeight() - (Math.sin(Math.toRadians(60)) * RADIUS))
@@ -96,21 +95,21 @@ public class FactoryShipRenderingProcessor implements Processor {
             init();
         }
         batch.begin();
-        p1factory.draw(batch);
-        p2factory.draw(batch);
-        if (GameSettings.numPlayers > 2) p3factory.draw(batch);
-        if (GameSettings.numPlayers > 3) p4factory.draw(batch);
+        p1factory.draw(batch, 1);
+        p2factory.draw(batch, 1);
+        if (GameSettings.numPlayers > 2) p3factory.draw(batch, 1);
+        if (GameSettings.numPlayers > 3) p4factory.draw(batch, 1);
         batch.end();
     }
 
     private void tick() {
         float delta = Gdx.graphics.getDeltaTime();
-        for (Sprite sprite : ships) {
+        for (FactoryShip ship : ships) {
             //Add and subtract 90 degrees to point ships toward circle perimeter while rotating
-            float newAngle = sprite.getRotation() + (SHIP_SPEED * delta) - 90;
-            sprite.setRotation(newAngle + 90);
+            float newAngle = ship.getRotation() + (SHIP_SPEED * delta) - 90;
+            ship.setRotation(newAngle + 90);
             //Move in a counter-clockwise circular path
-            sprite.setOriginBasedPosition(
+            ship.setOriginBasedPosition(
                     (float) (middleWidth() + Math.cos(Math.toRadians(newAngle)) * RADIUS),
                     (float) (middleHeight() + Math.sin(Math.toRadians(newAngle)) * RADIUS)
             );

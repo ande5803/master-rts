@@ -20,6 +20,8 @@ public class PaxBritannicaCaseStudy extends ApplicationAdapter {
 	public void create () {
 		processors = new LinkedList<Processor>();
 		processors.add(new FactoryShipRenderingProcessor());
+		Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
+		Gdx.input.setInputProcessor(GameStage.getInstance());
 	}
 
 	@Override
@@ -29,6 +31,7 @@ public class PaxBritannicaCaseStudy extends ApplicationAdapter {
 		for (Processor processor : processors) {
 			processor.process();
 		}
+		GameStage.getInstance().draw();
 	}
 	
 	@Override
@@ -36,5 +39,6 @@ public class PaxBritannicaCaseStudy extends ApplicationAdapter {
 		for (Processor processor : processors) {
 			processor.dispose();
 		}
+		GameStage.getInstance().dispose();
 	}
 }
