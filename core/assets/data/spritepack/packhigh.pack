@@ -1,34 +1,503 @@
 
 packhigh.png
-size: 1024,128
+size: 2048,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+1
+  rotate: false
+  xy: 1678, 54
+  size: 36, 78
+  orig: 36, 78
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 1069, 52
+  size: 56, 80
+  orig: 56, 80
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 889, 50
+  size: 57, 82
+  orig: 57, 82
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 948, 52
+  size: 57, 80
+  orig: 57, 80
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 1127, 53
+  size: 55, 79
+  orig: 55, 79
+  offset: 0, 0
+  index: -1
+abutton
+  rotate: false
+  xy: 1872, 90
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+acpubutton
+  rotate: false
+  xy: 768, 20
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+aplayerbutton
+  rotate: false
+  xy: 1828, 90
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+back
+  rotate: false
+  xy: 1629, 72
+  size: 47, 60
+  orig: 47, 60
+  offset: 0, 0
+  index: -1
+background
+  rotate: false
+  xy: 340, 4
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+bigbubble
+  rotate: false
+  xy: 768, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+blackfade
+  rotate: false
+  xy: 34, 2
+  size: 2, 2
+  orig: 2, 2
+  offset: 0, 0
+  index: -1
+bomb
+  rotate: false
+  xy: 684, 32
+  size: 4, 4
+  orig: 4, 4
+  offset: 0, 0
+  index: -1
+bomberoutline
+  rotate: false
+  xy: 1184, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+bomberp1
+  rotate: false
+  xy: 208, 55
+  size: 22, 14
+  orig: 22, 14
+  offset: 0, 0
+  index: -1
+bomberp2
+  rotate: false
+  xy: 1828, 74
+  size: 22, 14
+  orig: 22, 14
+  offset: 0, 0
+  index: -1
+bomberp3
+  rotate: false
+  xy: 1916, 118
+  size: 22, 14
+  orig: 22, 14
+  offset: 0, 0
+  index: -1
+bomberp4
+  rotate: false
+  xy: 174, 18
+  size: 22, 14
+  orig: 22, 14
+  offset: 0, 0
+  index: -1
+bubble
+  rotate: false
+  xy: 786, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+checkboxoff
+  rotate: false
+  xy: 174, 67
+  size: 32, 31
+  orig: 32, 31
+  offset: 0, 0
+  index: -1
+checkboxon
+  rotate: false
+  xy: 174, 34
+  size: 32, 31
+  orig: 32, 31
+  offset: 0, 0
+  index: -1
+cpubutton
+  rotate: false
+  xy: 597, 86
+  size: 120, 46
+  orig: 120, 46
+  offset: 0, 0
+  index: -1
+debrislarge
+  rotate: false
+  xy: 2, 100
+  size: 204, 154
+  orig: 204, 154
+  offset: 0, 0
+  index: -1
+debrismed
+  rotate: false
+  xy: 470, 38
+  size: 125, 94
+  orig: 125, 94
+  offset: 0, 0
+  index: -1
+debrissmall
+  rotate: false
+  xy: 1007, 55
+  size: 60, 77
+  orig: 60, 77
+  offset: 0, 0
+  index: -1
+explosion
+  rotate: false
+  xy: 813, 52
+  size: 74, 80
+  orig: 74, 80
+  offset: 0, 0
+  index: -1
+factoryheavydamage1
+  rotate: false
+  xy: 208, 134
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+factoryheavydamage2
+  rotate: false
+  xy: 390, 134
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+factoryheavydamage3
+  rotate: false
+  xy: 572, 134
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+factorylightdamage1
+  rotate: false
+  xy: 1482, 134
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+factorylightdamage2
+  rotate: false
+  xy: 1664, 134
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+factorylightdamage3
+  rotate: false
+  xy: 1846, 134
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
 factoryp1
   rotate: false
-  xy: 2, 2
+  xy: 754, 134
   size: 180, 120
   orig: 180, 120
   offset: 0, 0
   index: -1
 factoryp2
   rotate: false
-  xy: 184, 2
+  xy: 1300, 134
   size: 180, 120
   orig: 180, 120
   offset: 0, 0
   index: -1
 factoryp3
   rotate: false
-  xy: 366, 2
+  xy: 936, 134
   size: 180, 120
   orig: 180, 120
   offset: 0, 0
   index: -1
 factoryp4
   rotate: false
-  xy: 548, 2
+  xy: 1118, 134
   size: 180, 120
   orig: 180, 120
+  offset: 0, 0
+  index: -1
+fighteroutline
+  rotate: false
+  xy: 1382, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+fighterp1
+  rotate: false
+  xy: 803, 12
+  size: 9, 6
+  orig: 9, 6
+  offset: 0, 0
+  index: -1
+fighterp2
+  rotate: false
+  xy: 1566, 60
+  size: 9, 6
+  orig: 9, 6
+  offset: 0, 0
+  index: -1
+fighterp3
+  rotate: false
+  xy: 603, 11
+  size: 9, 6
+  orig: 9, 6
+  offset: 0, 0
+  index: -1
+fighterp4
+  rotate: false
+  xy: 648, 23
+  size: 9, 6
+  orig: 9, 6
+  offset: 0, 0
+  index: -1
+fish1
+  rotate: false
+  xy: 2, 2
+  size: 23, 12
+  orig: 23, 12
+  offset: 0, 0
+  index: -1
+fish2
+  rotate: false
+  xy: 27, 6
+  size: 21, 8
+  orig: 21, 8
+  offset: 0, 0
+  index: -1
+fish3
+  rotate: false
+  xy: 568, 7
+  size: 33, 10
+  orig: 33, 10
+  offset: 0, 0
+  index: -1
+fish4
+  rotate: false
+  xy: 786, 12
+  size: 15, 6
+  orig: 15, 6
+  offset: 0, 0
+  index: -1
+fish5
+  rotate: false
+  xy: 568, 19
+  size: 78, 17
+  orig: 78, 17
+  offset: 0, 0
+  index: -1
+fish6
+  rotate: false
+  xy: 470, 2
+  size: 96, 34
+  orig: 96, 34
+  offset: 0, 0
+  index: -1
+fish7
+  rotate: false
+  xy: 719, 64
+  size: 92, 68
+  orig: 92, 68
+  offset: 0, 0
+  index: -1
+fish8
+  rotate: false
+  xy: 208, 71
+  size: 130, 61
+  orig: 130, 61
+  offset: 0, 0
+  index: -1
+frigateoutline
+  rotate: false
+  xy: 1316, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+frigatep1
+  rotate: false
+  xy: 1716, 96
+  size: 54, 36
+  orig: 54, 36
+  offset: 0, 0
+  index: -1
+frigatep2
+  rotate: false
+  xy: 1716, 58
+  size: 54, 36
+  orig: 54, 36
+  offset: 0, 0
+  index: -1
+frigatep3
+  rotate: false
+  xy: 1772, 96
+  size: 54, 36
+  orig: 54, 36
+  offset: 0, 0
+  index: -1
+frigatep4
+  rotate: false
+  xy: 1772, 58
+  size: 54, 36
+  orig: 54, 36
+  offset: 0, 0
+  index: -1
+healthfull
+  rotate: false
+  xy: 1448, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+healthnone
+  rotate: false
+  xy: 1184, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+healthsome
+  rotate: false
+  xy: 1448, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+help
+  rotate: false
+  xy: 719, 2
+  size: 47, 60
+  orig: 47, 60
+  offset: 0, 0
+  index: -1
+laser
+  rotate: false
+  xy: 648, 31
+  size: 34, 5
+  orig: 34, 5
+  offset: 0, 0
+  index: -1
+missile
+  rotate: false
+  xy: 27, 2
+  size: 5, 2
+  orig: 5, 2
+  offset: 0, 0
+  index: -1
+music
+  rotate: false
+  xy: 1580, 72
+  size: 47, 60
+  orig: 47, 60
+  offset: 0, 0
+  index: -1
+needle
+  rotate: false
+  xy: 2028, 222
+  size: 6, 32
+  orig: 6, 32
+  offset: 0, 0
+  index: -1
+playerbutton
+  rotate: false
+  xy: 597, 38
+  size: 120, 46
+  orig: 120, 46
+  offset: 0, 0
+  index: -1
+production1
+  rotate: false
+  xy: 1250, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+production2
+  rotate: false
+  xy: 1514, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+production3
+  rotate: false
+  xy: 1250, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+productiontile
+  rotate: false
+  xy: 1382, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+settings
+  rotate: false
+  xy: 1514, 2
+  size: 50, 64
+  orig: 50, 64
+  offset: 0, 0
+  index: -1
+spark
+  rotate: false
+  xy: 796, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+touchArea
+  rotate: false
+  xy: 2, 16
+  size: 170, 82
+  orig: 170, 82
+  offset: 0, 0
+  index: -1
+upgradeoutline
+  rotate: false
+  xy: 1316, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
