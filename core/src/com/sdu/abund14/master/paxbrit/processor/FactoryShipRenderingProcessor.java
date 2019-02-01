@@ -12,7 +12,7 @@ import java.util.List;
 public class FactoryShipRenderingProcessor implements Processor {
 
     private static final float RADIUS = 200;
-    private static final float SHIP_SPEED = 3;
+    private static final float SHIP_SPEED = 15;
     private static final int LEFT = 0;
     private static final int UP = 90;
     private static final int RIGHT = 180;

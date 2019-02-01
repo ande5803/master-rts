@@ -7,10 +7,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.sdu.abund14.master.paxbrit.GameStage;
 import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 import com.sdu.abund14.master.paxbrit.util.NumbersUtil;
@@ -21,6 +19,7 @@ public class FactoryShip extends Ship {
     private static final float BOMBER_SPAWN_TIME = 4f;
     private static final float FRIGATE_SPAWN_TIME = 10f;
     private static final float UPGRADE_TIME = 20f;
+    private static final float BUTTON_OFFSET_DISTANCE = 4.6f;
 
     private ProductionButton button;
     private long productionStartedAt = 0;
@@ -77,10 +76,17 @@ public class FactoryShip extends Ship {
         System.out.println("fighter");
     }
 
+    private float getButtonOffsetX() {
+        return (float) -Math.cos(Math.toRadians(getRotation() % 360)) * BUTTON_OFFSET_DISTANCE;
+    }
+
+    private float getButtonOffsetY() {
+        return (float) -Math.sin(Math.toRadians(getRotation() % 360)) * BUTTON_OFFSET_DISTANCE;
+    }
+
     class ProductionButton extends Image {
 
-        private static final float SHIP_BOUNDS_TO_BUTTON_RADIUS_RATIO = 0.2f;
-
+        static final float SIDE_LENGTH = 60;
         private FactoryShip parent;
         private ShapeRenderer sr;
 
@@ -103,27 +109,23 @@ public class FactoryShip extends Ship {
                 }
             });
             setTouchable(Touchable.enabled);
-            setOrigin(getWidth() / 2, getHeight() / 2);
         }
 
         @Override
         public void draw(Batch batch, float alpha) {
             Rectangle parentBounds = parent.getBoundingRectangle();
-            float radius = 50;
-            float x = parentBounds.x + parentBounds.width / 2 - getWidth() / 2;
-            float y = parentBounds.y + parentBounds.height / 2 - getHeight() / 2;
+            float x = parentBounds.x + parentBounds.width / 2 - SIDE_LENGTH / 2 + parent.getButtonOffsetX();
+            float y = parentBounds.y + parentBounds.height / 2 - SIDE_LENGTH / 2 + parent.getButtonOffsetY();
+            setBounds(x, y, SIDE_LENGTH, SIDE_LENGTH);
             setPosition(x, y);
-            setOrigin(x + radius / 2, y + radius / 2);
-            setBounds(x, y, radius, radius);
 
             //Debug
             batch.end();
             sr.begin(ShapeRenderer.ShapeType.Line);
-            sr.setColor(Color.PURPLE);
-            sr.rect(x, y, radius, radius);
-            sr.rect(parentBounds.x, parentBounds.y, parentBounds.width, parentBounds.height);
             sr.setColor(Color.ORANGE);
             sr.rect(parent.getX(), parent.getY(), parent.getWidth(), parent.getHeight());
+            sr.circle(getOriginX(), getOriginY(), 10);
+            sr.rect(x, y, SIDE_LENGTH, SIDE_LENGTH);
             sr.end();
             batch.begin();
 
@@ -145,7 +147,7 @@ public class FactoryShip extends Ship {
                 buttonDecorationTexture = "healthfull"; //TODO: Change to reflect health
             }
             Sprite buttonDecoration = new Sprite(TextureRegionProvider.get(buttonDecorationTexture));
-            buttonDecoration.setPosition(getX(), getY());
+            buttonDecoration.setPosition(x, y);
             buttonDecoration.draw(batch, 1);
         }
     }
