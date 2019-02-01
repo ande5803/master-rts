@@ -9,7 +9,7 @@ import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FactoryShipRenderingProcessor implements Processor {
+public class FactoryShipProcessor implements Processor {
 
     private static final float RADIUS = 200;
     private static final float SHIP_SPEED = 15;
@@ -58,7 +58,6 @@ public class FactoryShipRenderingProcessor implements Processor {
 
             case 3:
                 //Three ships are placed with 120 degrees between them on the circle
-                //TODO: This code might be generalised to apply to any number of players
                 p2factory.setOriginBasedPosition(
                         (float) (middleWidth() + (Math.cos(Math.toRadians(60)) * RADIUS)),
                         (float) (middleHeight() - (Math.sin(Math.toRadians(60)) * RADIUS))
