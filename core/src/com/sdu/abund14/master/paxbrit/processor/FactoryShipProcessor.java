@@ -1,15 +1,17 @@
-package com.sdu.abund14.master.paxbrit.processor;
+package com.sdu.abund14.master.paxbrit.renderer;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sdu.abund14.master.paxbrit.GameScreen;
 import com.sdu.abund14.master.paxbrit.GameSettings;
-import com.sdu.abund14.master.paxbrit.interfaces.Processor;
+import com.sdu.abund14.master.paxbrit.interfaces.Renderer;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class FactoryShipProcessor implements Processor {
+public class FactoryShipRenderer implements Renderer {
 
     private static final float RADIUS = 200;
     private static final float SHIP_SPEED = 15;
@@ -24,12 +26,18 @@ public class FactoryShipProcessor implements Processor {
     private FactoryShip p3factory;
     private FactoryShip p4factory;
     private List<FactoryShip> ships;
+    private GameScreen screen;
 
-    private void init() {
-        batch = new SpriteBatch();
-        ships = new LinkedList<FactoryShip>();
-        createSprites();
-        setStartPositions(GameSettings.numPlayers);
+    private void init(Screen screen) {
+        if (screen instanceof GameScreen) {
+            this.screen = (GameScreen) screen;
+            batch = new SpriteBatch();
+            ships = new LinkedList<FactoryShip>();
+            createSprites();
+            setStartPositions(GameSettings.numPlayers);
+        } else {
+            System.out.println("Error in FactoryShipRenderer.init: Attempt to render factory ships on non-GameScreen instance");
+        }
     }
 
     private void createSprites() {
@@ -87,18 +95,12 @@ public class FactoryShipProcessor implements Processor {
     }
 
     @Override
-    public void process() {
-        if (p1factory != null) {
+    public void render(Screen screen) {
+        if (this.screen != null) {
             tick();
         } else {
-            init();
+            init(screen);
         }
-        batch.begin();
-        p1factory.draw(batch, 1);
-        p2factory.draw(batch, 1);
-        if (GameSettings.numPlayers > 2) p3factory.draw(batch, 1);
-        if (GameSettings.numPlayers > 3) p4factory.draw(batch, 1);
-        batch.end();
     }
 
     private void tick() {
