@@ -1,17 +1,14 @@
-package com.sdu.abund14.master.paxbrit.renderer;
+package com.sdu.abund14.master.paxbrit.processor;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.sdu.abund14.master.paxbrit.GameScreen;
 import com.sdu.abund14.master.paxbrit.GameSettings;
-import com.sdu.abund14.master.paxbrit.interfaces.Renderer;
+import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class FactoryShipRenderer implements Renderer {
+public class FactoryShipProcessor implements Processor {
 
     private static final float RADIUS = 200;
     private static final float SHIP_SPEED = 15;
@@ -20,24 +17,20 @@ public class FactoryShipRenderer implements Renderer {
     private static final int RIGHT = 180;
     private static final int DOWN = 270;
 
-    private SpriteBatch batch;
     private FactoryShip p1factory;
     private FactoryShip p2factory;
     private FactoryShip p3factory;
     private FactoryShip p4factory;
     private List<FactoryShip> ships;
-    private GameScreen screen;
 
-    private void init(Screen screen) {
-        if (screen instanceof GameScreen) {
-            this.screen = (GameScreen) screen;
-            batch = new SpriteBatch();
-            ships = new LinkedList<FactoryShip>();
-            createSprites();
-            setStartPositions(GameSettings.numPlayers);
-        } else {
-            System.out.println("Error in FactoryShipRenderer.init: Attempt to render factory ships on non-GameScreen instance");
-        }
+    public FactoryShipProcessor() {
+        init();
+    }
+
+    private void init() {
+        ships = new LinkedList<FactoryShip>();
+        createSprites();
+        setStartPositions(GameSettings.numPlayers);
     }
 
     private void createSprites() {
@@ -95,16 +88,7 @@ public class FactoryShipRenderer implements Renderer {
     }
 
     @Override
-    public void render(Screen screen) {
-        if (this.screen != null) {
-            tick();
-        } else {
-            init(screen);
-        }
-    }
-
-    private void tick() {
-        float delta = Gdx.graphics.getDeltaTime();
+    public void process(float delta) {
         for (FactoryShip ship : ships) {
             //Add and subtract 90 degrees to point ships toward circle perimeter while rotating
             float newAngle = ship.getRotation() + (SHIP_SPEED * delta) - 90;
@@ -123,10 +107,5 @@ public class FactoryShipRenderer implements Renderer {
 
     private int middleHeight() {
         return Gdx.graphics.getHeight() / 2;
-    }
-
-    @Override
-    public void dispose() {
-        batch.dispose();
     }
 }
