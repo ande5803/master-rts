@@ -7,9 +7,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TextureRegionProvider {
 
-    private static TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("data/spritepack/packhigh.pack"));
+    private TextureAtlas atlas;
 
-    public static TextureRegion get(String textureName) {
+    public TextureRegionProvider() {
+        atlas = new TextureAtlas(Gdx.files.internal("data/spritepack/packhigh.pack"));
+    }
+
+    public TextureRegion get(String textureName) {
         TextureRegion region;
         region = atlas.findRegion(textureName);
         if (region == null) {

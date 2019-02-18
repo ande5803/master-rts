@@ -10,6 +10,7 @@ import java.util.List;
 public class ShipsUtil {
 
     public static Ship getNearestEnemyShipWithTypePriorities(Ship source, ShipType... priorities) {
+        if (priorities == null || priorities.length <= 0) return null;
         for (ShipType type : priorities) {
             Ship ship = getNearestEnemyShipOfType(source, type);
             if (ship != null) {
@@ -28,7 +29,7 @@ public class ShipsUtil {
         double closestDistance = Double.MAX_VALUE;
         for (Ship ship : possibleTargets) {
             if (source.getPlayerNumber() == ship.getPlayerNumber()) {
-                continue;
+                continue; //Skip allies
             }
             double distance = Point2D.distance(source.getX(), source.getY(), ship.getX(), ship.getY());
             if (distance < closestDistance) {

@@ -7,10 +7,10 @@ import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 public class Ship extends Sprite {
 
     private int playerNumber;
-    public ShipType type;
+    ShipType type;
 
     Ship(int playerNumber, String textureName ) {
-        super(TextureRegionProvider.get(textureName));
+        super(new TextureRegionProvider().get(textureName));
         this.playerNumber = playerNumber;
         PaxBritannicaGame.currentMatch.addShip(this);
     }

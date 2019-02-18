@@ -12,7 +12,7 @@ public class Match {
     private List<FactoryShip> factories;
     private GameScreen screen;
 
-    public Match(GameScreen screen) {
+    Match(GameScreen screen) {
         this.screen = screen;
         fighters = new LinkedList<Fighter>();
         bombers = new LinkedList<Bomber>();
@@ -42,9 +42,7 @@ public class Match {
 
     public List<Ship> getAllShips() {
         List<Ship> ships = new LinkedList<Ship>();
-        ships.addAll(fighters);
-        ships.addAll(bombers);
-        ships.addAll(frigates);
+        ships.addAll(getCombatShips());
         ships.addAll(factories);
         return ships;
     }

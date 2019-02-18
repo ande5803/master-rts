@@ -24,10 +24,12 @@ public class FactoryShip extends Ship {
     private float upgradeTime = 17.3f;
 
     private ProductionButton button;
+    private TextureRegionProvider textureRegionProvider;
     private long productionStartedAt = 0;
 
     public FactoryShip(String textureName, boolean isPlayerControlled) {
         super(count + 1, textureName);
+        textureRegionProvider = new TextureRegionProvider();
         count++;
         type = ShipType.FACTORY;
         if (isPlayerControlled) {
@@ -134,7 +136,7 @@ public class FactoryShip extends Ship {
 
             //Draw button decoration
             String buttonDecorationTexture = getButtonDecorationTexture();
-            Sprite buttonDecoration = new Sprite(TextureRegionProvider.get(buttonDecorationTexture));
+            Sprite buttonDecoration = new Sprite(textureRegionProvider.get(buttonDecorationTexture));
             buttonDecoration.setPosition(x, y);
             if (buttonDecorationTexture.contains("health")) {
                 //Health indicators rotate with the ship, production outlines do not

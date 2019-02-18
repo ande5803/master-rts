@@ -5,13 +5,12 @@ import com.badlogic.gdx.Screen;
 
 public class PaxBritannicaGame extends Game {
 
-	private Screen currentScreen;
 	public static Match currentMatch;
 
 	@Override
 	public void create () {
-		currentScreen = new GameScreen();
-		currentMatch = new Match((GameScreen) currentScreen);
+		GameScreen currentScreen = new GameScreen();
+		currentMatch = new Match(currentScreen);
 		setScreen(currentScreen);
 	}
 }

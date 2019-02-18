@@ -8,5 +8,8 @@ public class Bomber extends CombatShip {
         ai = new BomberAI(this);
         type = ShipType.BOMBER;
         movementSpeed = 45;
+        magazineSize = 4;
+        fireRate = 1f;
+        reloadTime = 5f;
     }
 }

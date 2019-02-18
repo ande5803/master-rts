@@ -32,6 +32,6 @@ public class FighterAI extends CombatShipAI {
             target = PaxBritannicaGame.currentMatch.getAllShips().get(r.nextInt(PaxBritannicaGame.currentMatch.getAllShips().size()));
         }
 
-        moveWithinRangeOfTarget(target, range, delta);
+        engage(target, range, delta);
     }
 }

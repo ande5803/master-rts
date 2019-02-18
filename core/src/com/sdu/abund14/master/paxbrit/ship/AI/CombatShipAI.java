@@ -18,18 +18,27 @@ public abstract class CombatShipAI {
 
     public abstract void update(float delta);
 
-    void moveWithinRangeOfTarget(Ship target, float range, float delta) {
+    void engage(Ship target, float range, float delta) {
+        //Point towards target and calculate distance
         ship.setRotation((float) MathUtil.angleBetweenPoints(ship.getX(), ship.getY(), target.getX(), target.getY())); //TODO: Rotation speed
         double distance = Point2D.distance(ship.getX(), ship.getY(), target.getX(), target.getY());
+
+        //Determine whether to move towards or away from target
         Vector2 unitVector = null;
         if (distance > range) {
             unitVector = MathUtil.unitVector(ship.getRotation());
         } else if (distance <= range) {
             unitVector = MathUtil.unitVector((ship.getRotation() + 180) % 360);
         }
-        ship.setPosition(
-                ship.getX() + unitVector.x * ship.movementSpeed * delta,
-                ship.getY() + unitVector.y * ship.movementSpeed * delta
-        );
+
+        //Move
+        if (unitVector != null) {
+            ship.setPosition(
+                    ship.getX() + unitVector.x * ship.movementSpeed * delta,
+                    ship.getY() + unitVector.y * ship.movementSpeed * delta
+            );
+        }
+
+
     }
 }

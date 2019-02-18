@@ -9,5 +9,8 @@ public class Fighter extends CombatShip {
         ai = new FighterAI(this);
         type = ShipType.FIGHTER;
         movementSpeed = 80;
+        magazineSize = 5;
+        fireRate = 0.5f;
+        reloadTime = 3f;
     }
 }
