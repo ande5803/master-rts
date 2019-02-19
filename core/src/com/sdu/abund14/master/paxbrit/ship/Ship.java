@@ -10,7 +10,7 @@ public class Ship extends Sprite {
     ShipType type;
 
     Ship(int playerNumber, String textureName ) {
-        super(new TextureRegionProvider().get(textureName));
+        super(TextureRegionProvider.getInstance().get(textureName));
         this.playerNumber = playerNumber;
         PaxBritannicaGame.currentMatch.addShip(this);
     }

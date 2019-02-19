@@ -16,7 +16,7 @@ public class FrigateAI extends CombatShipAI {
     }
 
     private List<Ship> ships;
-    private float range = 200;
+    private float shootingRange = 300;
 
     @Override
     public void update(float delta) {
@@ -29,11 +29,8 @@ public class FrigateAI extends CombatShipAI {
                     ShipType.FRIGATE,
                     ShipType.FACTORY
             );
-
-            Random r = new Random();
-            target = PaxBritannicaGame.currentMatch.getAllShips().get(r.nextInt(PaxBritannicaGame.currentMatch.getAllShips().size()));
         }
 
-        engage(target, range, delta);
+        engage(target, shootingRange, delta);
     }
 }

@@ -8,8 +8,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class TextureRegionProvider {
 
     private TextureAtlas atlas;
+    private static TextureRegionProvider instance = null;
 
-    public TextureRegionProvider() {
+    public static TextureRegionProvider getInstance() {
+        if (instance == null) {
+            instance = new TextureRegionProvider();
+        }
+        return instance;
+    }
+
+    private TextureRegionProvider() {
         atlas = new TextureAtlas(Gdx.files.internal("data/spritepack/packhigh.pack"));
     }
 

@@ -8,8 +8,11 @@ public class Frigate extends CombatShip {
         ai = new FrigateAI(this);
         type = ShipType.FRIGATE;
         movementSpeed = 30;
-        magazineSize = 10;
+        setMagazineSize(10);
         fireRate = 0.2f;
         reloadTime = 3f;
+        shotDamage = 50;
+        bulletSpeed = 50;
+        bulletTexture = "missile";
     }
 }

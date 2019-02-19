@@ -7,11 +7,10 @@ import com.sdu.abund14.master.paxbrit.ship.ShipType;
 import com.sdu.abund14.master.paxbrit.util.ShipsUtil;
 
 import java.util.List;
-import java.util.Random;
 
 public class FighterAI extends CombatShipAI {
-    private List<Ship> ships;
-    private float range = 200;
+    private List<Ship> ships = null;
+    private float shootingRange = 200;
 
     public FighterAI(Fighter fighter) {
         super(fighter);
@@ -28,10 +27,8 @@ public class FighterAI extends CombatShipAI {
                     ShipType.FRIGATE,
                     ShipType.FACTORY
             );
-            Random r = new Random();
-            target = PaxBritannicaGame.currentMatch.getAllShips().get(r.nextInt(PaxBritannicaGame.currentMatch.getAllShips().size()));
         }
 
-        engage(target, range, delta);
+        engage(target, shootingRange, delta);
     }
 }

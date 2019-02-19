@@ -12,7 +12,7 @@ import java.util.Random;
 public class BomberAI extends CombatShipAI {
 
     private List<Ship> ships;
-    private float range = 200;
+    private float shootingRange = 50;
 
     public BomberAI(Bomber bomber) {
         super(bomber);
@@ -27,10 +27,7 @@ public class BomberAI extends CombatShipAI {
                     ShipType.FRIGATE,
                     ShipType.FACTORY
             );
-            Random r = new Random();
-            target = PaxBritannicaGame.currentMatch.getAllShips().get(r.nextInt(PaxBritannicaGame.currentMatch.getAllShips().size()));
         }
-
-        engage(target, range, delta);
+        engage(target, shootingRange, delta);
     }
 }

@@ -25,10 +25,13 @@ public abstract class CombatShipAI {
 
         //Determine whether to move towards or away from target
         Vector2 unitVector = null;
-        if (distance > range) {
+        float rangeDeviation = 30;
+        if (distance > range + rangeDeviation) {
             unitVector = MathUtil.unitVector(ship.getRotation());
-        } else if (distance <= range) {
+        } else if (distance < range - rangeDeviation) {
             unitVector = MathUtil.unitVector((ship.getRotation() + 180) % 360);
+        } else {
+            if (ship.isReadyToShoot()) ship.shoot();
         }
 
         //Move
@@ -38,7 +41,5 @@ public abstract class CombatShipAI {
                     ship.getY() + unitVector.y * ship.movementSpeed * delta
             );
         }
-
-
     }
 }

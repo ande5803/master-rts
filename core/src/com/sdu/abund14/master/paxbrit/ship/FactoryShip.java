@@ -24,12 +24,11 @@ public class FactoryShip extends Ship {
     private float upgradeTime = 17.3f;
 
     private ProductionButton button;
-    private TextureRegionProvider textureRegionProvider;
+    private TextureRegionProvider textureRegionProvider = TextureRegionProvider.getInstance();
     private long productionStartedAt = 0;
 
     public FactoryShip(String textureName, boolean isPlayerControlled) {
         super(count + 1, textureName);
-        textureRegionProvider = new TextureRegionProvider();
         count++;
         type = ShipType.FACTORY;
         if (isPlayerControlled) {
@@ -43,10 +42,6 @@ public class FactoryShip extends Ship {
         if (button != null) {
             button.draw(batch, alpha);
         }
-    }
-
-    public ProductionButton getButton() {
-        return button;
     }
 
     private boolean touchDownFired() {

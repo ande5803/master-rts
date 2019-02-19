@@ -4,7 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
+import com.sdu.abund14.master.paxbrit.processor.BulletProcessor;
 import com.sdu.abund14.master.paxbrit.processor.CombatShipProcessor;
 import com.sdu.abund14.master.paxbrit.processor.FactoryShipProcessor;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
@@ -18,20 +21,20 @@ public class GameScreen implements Screen {
     private static final float BG_COLOR_BLUE = .7f;
 
     private List<Processor> processors;
-    private GameStage stage;
+    private Stage stage = new Stage();
     private SpriteBatch batch;
 
-    public GameStage getStage() {
+    public Stage getStage() {
         return stage;
     }
 
     @Override
     public void show() {
         processors = new LinkedList<Processor>();
-        stage = new GameStage();
         batch = new SpriteBatch();
         processors.add(new FactoryShipProcessor());
         processors.add(new CombatShipProcessor());
+        processors.add(new BulletProcessor());
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -47,6 +50,9 @@ public class GameScreen implements Screen {
         batch.begin();
         for (Ship ship : PaxBritannicaGame.currentMatch.getAllShips()) {
             ship.draw(batch, 1);
+        }
+        for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets()) {
+            bullet.draw(batch);
         }
         batch.end();
     }

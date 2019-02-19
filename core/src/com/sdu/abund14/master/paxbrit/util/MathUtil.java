@@ -21,4 +21,11 @@ public class MathUtil {
         vector.y = (float) Math.sin(Math.toRadians(angle));
         return vector;
     }
+
+    public static Vector2 offsetVector(float originX, float originY, double angle, float distance) {
+        Vector2 offset = unitVector(angle);
+        offset.x *= distance;
+        offset.y *= distance;
+        return new Vector2(originX, originY).add(offset);
+    }
 }

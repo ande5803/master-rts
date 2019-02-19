@@ -1,5 +1,6 @@
 package com.sdu.abund14.master.paxbrit;
 
+import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.ship.*;
 
 import java.util.LinkedList;
@@ -10,6 +11,7 @@ public class Match {
     private List<Bomber> bombers;
     private List<Frigate> frigates;
     private List<FactoryShip> factories;
+    private List<Bullet> bullets;
     private GameScreen screen;
 
     Match(GameScreen screen) {
@@ -18,6 +20,7 @@ public class Match {
         bombers = new LinkedList<Bomber>();
         frigates = new LinkedList<Frigate>();
         factories = new LinkedList<FactoryShip>();
+        bullets = new LinkedList<Bullet>();
     }
 
     public GameScreen getScreen() {
@@ -39,6 +42,8 @@ public class Match {
     public List<FactoryShip> getFactories() {
         return factories;
     }
+
+    public List<Bullet> getBullets() { return bullets; }
 
     public List<Ship> getAllShips() {
         List<Ship> ships = new LinkedList<Ship>();
@@ -77,5 +82,15 @@ public class Match {
         } else if (ship instanceof FactoryShip) {
             factories.remove(ship);
         }
+    }
+
+    public void addBullet(Bullet bullet) {
+        bullets.add(bullet);
+    }
+
+    public boolean removeBullet(Bullet bullet) {
+        boolean success = bullets.remove(bullet);
+        if (!success) System.out.println("ERROR: Match.removeBullet - No matching bullet found");
+        return success;
     }
 }
