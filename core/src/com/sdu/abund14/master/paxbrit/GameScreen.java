@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
-import com.sdu.abund14.master.paxbrit.processor.BulletProcessor;
-import com.sdu.abund14.master.paxbrit.processor.CollisionProcessor;
-import com.sdu.abund14.master.paxbrit.processor.CombatShipProcessor;
-import com.sdu.abund14.master.paxbrit.processor.FactoryShipProcessor;
+import com.sdu.abund14.master.paxbrit.processor.*;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
 
 import java.util.LinkedList;
@@ -37,6 +34,7 @@ public class GameScreen implements Screen {
         processors.add(new CombatShipProcessor());
         processors.add(new BulletProcessor());
         processors.add(new CollisionProcessor());
+        processors.add(new AIOpponentProcessor());
         Gdx.input.setInputProcessor(stage);
     }
 

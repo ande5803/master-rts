@@ -25,13 +25,15 @@ public class FactoryShip extends Ship {
     private ProductionButton button;
     private TextureRegionProvider textureRegionProvider = TextureRegionProvider.getInstance();
     private long productionStartedAt = 0;
+    private boolean playerControlled;
 
-    public FactoryShip(String textureName, boolean isPlayerControlled) {
+    public FactoryShip(String textureName, boolean playerControlled) {
         super(count + 1, textureName);
         count++;
         type = ShipType.FACTORY;
         maxHealth = currentHealth = 25000;
-        if (isPlayerControlled) {
+        this.playerControlled = playerControlled;
+        if (playerControlled) {
             button = new ProductionButton(this);
         }
     }
@@ -63,23 +65,23 @@ public class FactoryShip extends Ship {
         productionStartedAt = 0;
     }
 
-    private void upgrade() {
+    public void upgrade() {
         fighterSpawnTime *= UPGRADE_PRODUCTION_MULTIPLIER;
         bomberSpawnTime *= UPGRADE_PRODUCTION_MULTIPLIER;
         frigateSpawnTime *= UPGRADE_PRODUCTION_MULTIPLIER;
         upgradeTime *= UPGRADE_PRODUCTION_MULTIPLIER;
     }
 
-    private void spawnFrigate() {
-        new Frigate(getPlayerNumber(), getX(), getY());
+    public void spawnFrigate() {
+        new Frigate(getPlayerNumber(), getPosition().x, getPosition().y);
     }
 
-    private void spawnBomber() {
-        new Bomber(getPlayerNumber(), getX(), getY());
+    public void spawnBomber() {
+        new Bomber(getPlayerNumber(), getPosition().x, getPosition().y);
     }
 
-    private void spawnFighter() {
-        new Fighter(getPlayerNumber(), getX(), getY());
+    public void spawnFighter() {
+        new Fighter(getPlayerNumber(), getPosition().x, getPosition().y);
     }
 
     private float getButtonOffsetX() {
@@ -88,6 +90,26 @@ public class FactoryShip extends Ship {
 
     private float getButtonOffsetY() {
         return (float) -Math.sin(Math.toRadians(getRotation() % 360)) * BUTTON_OFFSET_DISTANCE;
+    }
+
+    public boolean isPlayerControlled() {
+        return playerControlled;
+    }
+
+    public float getFighterSpawnTime() {
+        return fighterSpawnTime;
+    }
+
+    public float getBomberSpawnTime() {
+        return bomberSpawnTime;
+    }
+
+    public float getFrigateSpawnTime() {
+        return frigateSpawnTime;
+    }
+
+    public float getUpgradeTime() {
+        return upgradeTime;
     }
 
     class ProductionButton extends Image {

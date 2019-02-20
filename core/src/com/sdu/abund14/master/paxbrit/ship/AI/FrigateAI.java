@@ -15,12 +15,11 @@ public class FrigateAI extends CombatShipAI {
         super(frigate);
     }
 
-    private List<Ship> ships;
     private float shootingRange = 300;
 
     @Override
     public void update(float delta) {
-        ships = PaxBritannicaGame.currentMatch.getAllShips();
+        List<Ship> ships = PaxBritannicaGame.currentMatch.getAllShips();
         if (target == null || !ships.contains(target)) {
             target = ShipsUtil.getNearestEnemyShipWithTypePriorities(
                     ship,

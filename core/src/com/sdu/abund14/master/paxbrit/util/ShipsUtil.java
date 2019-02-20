@@ -55,4 +55,14 @@ public class ShipsUtil {
                 return null;
         }
     }
+
+    public static int getEnemyShipCount(ShipType type, int playerNumber) {
+        int result = 0;
+        for (Ship ship : getShipsOfType(type)) {
+            if (ship.getPlayerNumber() != playerNumber) {
+                result++;
+            }
+        }
+        return result;
+    }
 }

@@ -36,15 +36,11 @@ public class FactoryShipProcessor implements Processor {
     private void createSprites() {
         p1factory = new FactoryShip("factoryp1", true);
         p2factory = new FactoryShip("factoryp2", false);
-        PaxBritannicaGame.currentMatch.addShip(p1factory);
-        PaxBritannicaGame.currentMatch.addShip(p2factory);
         if (GameSettings.numPlayers > 2) {
             p3factory = new FactoryShip("factoryp3", false);
-            PaxBritannicaGame.currentMatch.addShip(p3factory);
         }
         if (GameSettings.numPlayers > 3) {
             p4factory = new FactoryShip("factoryp4", false);
-            PaxBritannicaGame.currentMatch.addShip(p4factory);
         }
     }
 

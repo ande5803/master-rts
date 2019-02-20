@@ -3,6 +3,9 @@ package com.sdu.abund14.master.paxbrit.util;
 
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class MathUtil {
     public static long toNanoSeconds(float timeInSeconds) {
         return (long) (timeInSeconds * 1000000000L);
@@ -27,5 +30,9 @@ public class MathUtil {
         offset.x *= distance;
         offset.y *= distance;
         return new Vector2(originX, originY).add(offset);
+    }
+
+    public static int max(Integer... vals) {
+        return Collections.max(Arrays.asList(vals));
     }
 }
