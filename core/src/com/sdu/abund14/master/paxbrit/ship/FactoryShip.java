@@ -31,7 +31,7 @@ public class FactoryShip extends Ship {
         super(count + 1, textureName);
         count++;
         type = ShipType.FACTORY;
-        maxHealth = currentHealth = 1;
+        maxHealth = currentHealth = 25000;
         this.playerControlled = playerControlled;
         if (playerControlled) {
             button = new ProductionButton(this);
