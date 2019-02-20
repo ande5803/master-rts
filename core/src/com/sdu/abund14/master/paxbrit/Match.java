@@ -75,4 +75,30 @@ public class Match {
     public void addBullet(Bullet bullet) {
         bullets.add(bullet);
     }
+
+    public void checkGameEndConditions() {
+        int playerShips = 0;
+        int opponentShips = 0;
+        for (FactoryShip ship : factories) {
+            if (ship.isDead()) continue;
+            if (ship.isPlayerControlled()) {
+                playerShips++;
+            } else {
+                opponentShips++;
+            }
+        }
+        if (playerShips == 0) {
+            endGame(false);
+        } else if (playerShips > 0 && opponentShips == 0) {
+            endGame(true);
+        }
+    }
+
+    private void endGame(boolean victory) {
+        if (victory) {
+            System.out.println("Victory!");
+        } else {
+            System.out.println("Defeat!");
+        }
+    }
 }

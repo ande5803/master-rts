@@ -13,18 +13,15 @@ public class BulletProcessor implements Processor {
         ListIterator<Bullet> bulletIterator = PaxBritannicaGame.currentMatch.getBullets().listIterator();
         while (bulletIterator.hasNext()) {
             Bullet bullet = bulletIterator.next();
-
             if (!bullet.isAlive()) {
                 bulletIterator.remove();
                 continue;
             }
-
             //Propagate forward
             bullet.setPosition(
                     (float) (bullet.getX() + Math.cos(Math.toRadians(bullet.getRotation())) * bullet.getSpeed() * delta),
                     (float) (bullet.getY() + Math.sin(Math.toRadians(bullet.getRotation())) * bullet.getSpeed() * delta)
             );
-
             //Remove if out of bounds
             if (bullet.getX() < 0 ||
                 bullet.getX() > Gdx.graphics.getWidth() ||

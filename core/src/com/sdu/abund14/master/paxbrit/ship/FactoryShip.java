@@ -31,7 +31,7 @@ public class FactoryShip extends Ship {
         super(count + 1, textureName);
         count++;
         type = ShipType.FACTORY;
-        maxHealth = currentHealth = 25000;
+        maxHealth = currentHealth = 1;
         this.playerControlled = playerControlled;
         if (playerControlled) {
             button = new ProductionButton(this);
@@ -118,6 +118,7 @@ public class FactoryShip extends Ship {
             button.remove();
             button.clear();
         }
+        PaxBritannicaGame.currentMatch.checkGameEndConditions();
     }
 
     class ProductionButton extends Image {

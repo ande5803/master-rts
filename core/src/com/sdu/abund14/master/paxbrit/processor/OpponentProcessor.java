@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class AIOpponentProcessor implements Processor {
+public class OpponentProcessor implements Processor {
 
     private List<Opponent> opponents;
     private float aiProductionDelay = 0.5f;

@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
         processors.add(new CombatShipProcessor());
         processors.add(new BulletProcessor());
         processors.add(new CollisionProcessor());
-        processors.add(new AIOpponentProcessor());
+        processors.add(new OpponentProcessor());
         Gdx.input.setInputProcessor(stage);
     }
 
