@@ -20,7 +20,12 @@ public abstract class CombatShipAI {
 
     void engage(Ship target, float range, float delta) {
         //Point towards target and calculate distance
-        ship.setRotation((float) MathUtil.angleBetweenPoints(ship.getX(), ship.getY(), target.getX(), target.getY())); //TODO: Rotation speed
+        ship.setRotation((float) MathUtil.angleBetweenPoints( //TODO: Rotation speed
+                ship.getX(),
+                ship.getY(),
+                target.getPosition().x,
+                target.getPosition().y
+        ));
         double distance = Point2D.distance(ship.getX(), ship.getY(), target.getX(), target.getY());
 
         //Determine whether to move towards or away from target

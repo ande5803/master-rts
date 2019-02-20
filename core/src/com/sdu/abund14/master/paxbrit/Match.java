@@ -72,25 +72,7 @@ public class Match {
         }
     }
 
-    public void removeShip(Ship ship) {
-        if (ship instanceof Fighter) {
-            fighters.remove(ship);
-        } else if (ship instanceof Bomber) {
-            bombers.remove(ship);
-        } else if (ship instanceof Frigate) {
-            frigates.remove(ship);
-        } else if (ship instanceof FactoryShip) {
-            factories.remove(ship);
-        }
-    }
-
     public void addBullet(Bullet bullet) {
         bullets.add(bullet);
-    }
-
-    public boolean removeBullet(Bullet bullet) {
-        boolean success = bullets.remove(bullet);
-        if (!success) System.out.println("ERROR: Match.removeBullet - No matching bullet found");
-        return success;
     }
 }

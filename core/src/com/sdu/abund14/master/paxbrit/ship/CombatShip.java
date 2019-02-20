@@ -7,12 +7,13 @@ import com.sdu.abund14.master.paxbrit.util.MathUtil;
 
 public class CombatShip extends Ship {
 
-    private static final float BULLET_OFFSET_DISTANCE = 50;
+    private static final float BULLET_OFFSET_DISTANCE = 30;
 
     public CombatShipAI ai;
     public float movementSpeed = 0;
     public float shotCooldownTimeLeft = 0;
     public float reloadTimeLeft = 0;
+    public int ammoLeft = 0;
 
     float fireRate = 0; //Shots per second
     int shotDamage = 0;
@@ -21,7 +22,6 @@ public class CombatShip extends Ship {
     String bulletTexture;
 
     private int magazineSize = 0;
-    private int ammoLeft = 0;
 
     CombatShip(String type, int playerNumber, float x, float y) {
         super(playerNumber,type + "p" + playerNumber);

@@ -7,10 +7,11 @@ public class Frigate extends CombatShip {
         super("frigate", playerNumber, x, y);
         ai = new FrigateAI(this);
         type = ShipType.FRIGATE;
+        maxHealth = currentHealth = 2000;
         movementSpeed = 30;
         setMagazineSize(10);
-        fireRate = 0.2f;
-        reloadTime = 3f;
+        fireRate = 5;
+        reloadTime = 5;
         shotDamage = 50;
         bulletSpeed = 50;
         bulletTexture = "missile";

@@ -6,14 +6,14 @@ import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 
 public class Bullet extends Sprite {
 
-    private int owner;
+    private int playerNumber;
     private int damage;
     private int speed;
-    public boolean alive = true;
+    private boolean alive = true;
 
-    public Bullet(int owner, int damage, int speed, float startX, float startY, float angle, String texture) {
+    public Bullet(int playerNumber, int damage, int speed, float startX, float startY, float angle, String texture) {
         super(TextureRegionProvider.getInstance().get(texture));
-        this.owner = owner;
+        this.playerNumber = playerNumber;
         this.damage = damage;
         this.speed = speed;
         setPosition(startX, startY);
@@ -21,8 +21,8 @@ public class Bullet extends Sprite {
         PaxBritannicaGame.currentMatch.addBullet(this);
     }
 
-    public int getOwner() {
-        return owner;
+    public int getPlayerNumber() {
+        return playerNumber;
     }
 
     public int getDamage() {
@@ -33,5 +33,7 @@ public class Bullet extends Sprite {
         return speed;
     }
 
+    public boolean isAlive() { return alive; }
 
+    public void destroy() { alive = false; }
 }

@@ -28,7 +28,6 @@ public class FighterAI extends CombatShipAI {
                     ShipType.FACTORY
             );
         }
-
-        engage(target, shootingRange, delta);
+        if (target != null) engage(target, shootingRange, delta);
     }
 }

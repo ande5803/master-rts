@@ -31,6 +31,6 @@ public class FrigateAI extends CombatShipAI {
             );
         }
 
-        engage(target, shootingRange, delta);
+        if (target != null) engage(target, shootingRange, delta);
     }
 }

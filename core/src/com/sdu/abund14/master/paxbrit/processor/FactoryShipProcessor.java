@@ -2,16 +2,18 @@ package com.sdu.abund14.master.paxbrit.processor;
 
 import com.badlogic.gdx.Gdx;
 import com.sdu.abund14.master.paxbrit.GameSettings;
+import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class FactoryShipProcessor implements Processor {
 
     private static final float RADIUS = 200;
-    private static final float SHIP_SPEED = 15;
+    private static final float SHIP_SPEED = 3;
     private static final int LEFT = 0;
     private static final int UP = 90;
     private static final int RIGHT = 180;
@@ -21,14 +23,12 @@ public class FactoryShipProcessor implements Processor {
     private FactoryShip p2factory;
     private FactoryShip p3factory;
     private FactoryShip p4factory;
-    private List<FactoryShip> ships;
 
     public FactoryShipProcessor() {
         init();
     }
 
     private void init() {
-        ships = new LinkedList<FactoryShip>();
         createSprites();
         setStartPositions(GameSettings.numPlayers);
     }
@@ -36,15 +36,15 @@ public class FactoryShipProcessor implements Processor {
     private void createSprites() {
         p1factory = new FactoryShip("factoryp1", true);
         p2factory = new FactoryShip("factoryp2", false);
-        ships.add(p1factory);
-        ships.add(p2factory);
+        PaxBritannicaGame.currentMatch.addShip(p1factory);
+        PaxBritannicaGame.currentMatch.addShip(p2factory);
         if (GameSettings.numPlayers > 2) {
             p3factory = new FactoryShip("factoryp3", false);
-            ships.add(p3factory);
+            PaxBritannicaGame.currentMatch.addShip(p3factory);
         }
         if (GameSettings.numPlayers > 3) {
             p4factory = new FactoryShip("factoryp4", false);
-            ships.add(p4factory);
+            PaxBritannicaGame.currentMatch.addShip(p4factory);
         }
     }
 
@@ -89,7 +89,14 @@ public class FactoryShipProcessor implements Processor {
 
     @Override
     public void process(float delta) {
-        for (FactoryShip ship : ships) {
+        ListIterator<FactoryShip> iterator = PaxBritannicaGame.currentMatch.getFactories().listIterator();
+        while (iterator.hasNext()) {
+            FactoryShip ship = iterator.next();
+            if (!ship.isAlive()) {
+                iterator.remove();
+                continue;
+            }
+
             //Add and subtract 90 degrees to point ships toward circle perimeter while rotating
             float newAngle = ship.getRotation() + (SHIP_SPEED * delta) - 90;
             ship.setRotation(newAngle + 90);

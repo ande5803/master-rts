@@ -13,7 +13,6 @@ import com.sdu.abund14.master.paxbrit.util.MathUtil;
 
 public class FactoryShip extends Ship {
 
-
     private static final float UPGRADE_PRODUCTION_MULTIPLIER = 0.85f;
     private static final float BUTTON_OFFSET_DISTANCE = 4.6f;
     private static int count = 0;
@@ -31,6 +30,7 @@ public class FactoryShip extends Ship {
         super(count + 1, textureName);
         count++;
         type = ShipType.FACTORY;
+        maxHealth = currentHealth = 25000;
         if (isPlayerControlled) {
             button = new ProductionButton(this);
         }
@@ -45,7 +45,6 @@ public class FactoryShip extends Ship {
     }
 
     private boolean touchDownFired() {
-        System.out.println("touchdown");
         productionStartedAt = System.nanoTime();
         return true;
     }
@@ -65,7 +64,6 @@ public class FactoryShip extends Ship {
     }
 
     private void upgrade() {
-        System.out.println("upgrade");
         fighterSpawnTime *= UPGRADE_PRODUCTION_MULTIPLIER;
         bomberSpawnTime *= UPGRADE_PRODUCTION_MULTIPLIER;
         frigateSpawnTime *= UPGRADE_PRODUCTION_MULTIPLIER;
@@ -73,17 +71,14 @@ public class FactoryShip extends Ship {
     }
 
     private void spawnFrigate() {
-        System.out.println("frigate");
         new Frigate(getPlayerNumber(), getX(), getY());
     }
 
     private void spawnBomber() {
-        System.out.println("bomber");
         new Bomber(getPlayerNumber(), getX(), getY());
     }
 
     private void spawnFighter() {
-        System.out.println("fighter");
         new Fighter(getPlayerNumber(), getX(), getY());
     }
 
