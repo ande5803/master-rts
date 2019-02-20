@@ -23,8 +23,8 @@ public class Ship extends Sprite {
         return playerNumber;
     }
 
-    public boolean isAlive() {
-        return alive;
+    public boolean isDead() {
+        return !alive;
     }
 
     public Vector2 getPosition() {
@@ -33,6 +33,12 @@ public class Ship extends Sprite {
 
     public void takeDamage(int amount) {
         currentHealth -= amount;
-        if (currentHealth <= 0) { alive = false; }
+        if (currentHealth <= 0) {
+            alive = false;
+            destroy();
+        }
     }
+
+    //Override to do extra things on destruction
+    public void destroy() {}
 }

@@ -112,6 +112,14 @@ public class FactoryShip extends Ship {
         return upgradeTime;
     }
 
+    @Override
+    public void destroy() {
+        if (button != null) {
+            button.remove();
+            button.clear();
+        }
+    }
+
     class ProductionButton extends Image {
 
         static final float SIDE_LENGTH = 60;

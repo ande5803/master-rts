@@ -31,15 +31,15 @@ public class CombatShipProcessor implements Processor {
     private void removeDeadShips() {
         ListIterator<Fighter> fighterListIterator = PaxBritannicaGame.currentMatch.getFighters().listIterator();
         while (fighterListIterator.hasNext()) {
-            if (!fighterListIterator.next().isAlive()) fighterListIterator.remove();
+            if (fighterListIterator.next().isDead()) fighterListIterator.remove();
         }
         ListIterator<Bomber> bomberListIterator = PaxBritannicaGame.currentMatch.getBombers().listIterator();
         while (bomberListIterator.hasNext()) {
-            if (!bomberListIterator.next().isAlive()) bomberListIterator.remove();
+            if (bomberListIterator.next().isDead()) bomberListIterator.remove();
         }
         ListIterator<Frigate> frigateListIterator = PaxBritannicaGame.currentMatch.getFrigates().listIterator();
         while (frigateListIterator.hasNext()) {
-            if (!frigateListIterator.next().isAlive()) frigateListIterator.remove();
+            if (frigateListIterator.next().isDead()) frigateListIterator.remove();
         }
     }
 }

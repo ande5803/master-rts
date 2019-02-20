@@ -22,7 +22,7 @@ public class AIOpponentProcessor implements Processor {
             opponents.add(new Opponent(ship));
         }
         for (Opponent opponent : opponents) {
-            opponent.getAi().makeProductionChoice();
+            opponent.setCurrentChoice(opponent.getAi().makeProductionChoice());
         }
     }
 
@@ -30,6 +30,9 @@ public class AIOpponentProcessor implements Processor {
     public void process(float delta) {
         if (opponents == null) init();
         for (Opponent opponent : opponents) {
+            if (opponent.getShip().isDead()) {
+                continue;
+            }
             opponent.setProductionTimeLeft(opponent.getProductionTimeLeft() - delta);
             if (opponent.getProductionTimeLeft() <= 0) {
                 opponent.triggerProduction();
