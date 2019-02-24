@@ -7,14 +7,15 @@ import com.sdu.abund14.master.paxbrit.ship.ShipType;
 import com.sdu.abund14.master.paxbrit.util.ShipsUtil;
 
 import java.util.List;
-import java.util.Random;
 
 public class BomberAI extends CombatShipAI {
 
     private float shootingRange = 50;
+    private Bomber bomber;
 
     public BomberAI(Bomber bomber) {
         super(bomber);
+        this.bomber = bomber;
     }
 
     @Override
@@ -27,6 +28,6 @@ public class BomberAI extends CombatShipAI {
                     ShipType.FACTORY
             );
         }
-        if (target != null) engage(target, shootingRange, delta);
+        if (target != null) bomber.engage(target, shootingRange, delta);
     }
 }

@@ -16,5 +16,6 @@ public class Fighter extends CombatShip {
         shotDamage = 10;
         bulletSpeed = 1000;
         bulletTexture = "laser";
+        turnSpeed = 120;
     }
 }

@@ -7,14 +7,15 @@ import com.sdu.abund14.master.paxbrit.ship.ShipType;
 import com.sdu.abund14.master.paxbrit.util.ShipsUtil;
 
 import java.util.List;
-import java.util.Random;
 
 public class FrigateAI extends CombatShipAI {
 
     public FrigateAI(Frigate frigate) {
         super(frigate);
+        this.frigate = frigate;
     }
 
+    private Frigate frigate;
     private float shootingRange = 300;
 
     @Override
@@ -30,6 +31,6 @@ public class FrigateAI extends CombatShipAI {
             );
         }
 
-        if (target != null) engage(target, shootingRange, delta);
+        if (target != null) frigate.engage(target, shootingRange, delta);
     }
 }

@@ -9,11 +9,13 @@ import com.sdu.abund14.master.paxbrit.util.ShipsUtil;
 import java.util.List;
 
 public class FighterAI extends CombatShipAI {
-    private List<Ship> ships = null;
+    private List<Ship> ships;
     private float shootingRange = 200;
+    private Fighter fighter;
 
     public FighterAI(Fighter fighter) {
         super(fighter);
+        this.fighter = fighter;
     }
 
     @Override
@@ -28,6 +30,6 @@ public class FighterAI extends CombatShipAI {
                     ShipType.FACTORY
             );
         }
-        if (target != null) engage(target, shootingRange, delta);
+        if (target != null) fighter.engage(target, shootingRange, delta);
     }
 }

@@ -35,4 +35,9 @@ public class MathUtil {
     public static int max(Integer... vals) {
         return Collections.max(Arrays.asList(vals));
     }
+
+    public static float mod(float a, float b) {
+        float result = a % b;
+        return result < 0 ? result + b : result;
+    }
 }
