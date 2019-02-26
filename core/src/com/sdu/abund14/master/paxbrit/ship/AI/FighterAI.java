@@ -29,6 +29,8 @@ public class FighterAI extends CombatShipAI {
                     ShipType.FRIGATE,
                     ShipType.FACTORY
             );
+        } else if (target.isOffScreen()) {
+            target = null;
         }
         if (target != null) fighter.engage(target, shootingRange, delta);
     }

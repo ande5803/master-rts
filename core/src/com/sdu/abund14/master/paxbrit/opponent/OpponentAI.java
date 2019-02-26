@@ -11,13 +11,11 @@ import java.util.Random;
 public class OpponentAI {
 
     private int playerNumber;
-    private int difficulty;
     private float primaryOpportunityThreatWeight;
     private float secondaryOpportunityThreatWeight;
 
     public OpponentAI(int playerNumber, int difficulty) {
         this.playerNumber = playerNumber;
-        this.difficulty = difficulty;
 
         switch (difficulty) {
             case GameSettings.DIFFICULTY_NORMAL:

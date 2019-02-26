@@ -27,6 +27,8 @@ public class BomberAI extends CombatShipAI {
                     ShipType.FRIGATE,
                     ShipType.FACTORY
             );
+        } else if (target.isOffScreen()) {
+            target = null;
         }
         if (target != null) bomber.engage(target, shootingRange, delta);
     }

@@ -36,6 +36,7 @@ public class CombatShip extends Ship {
         super(playerNumber,type + "p" + playerNumber);
         position.x = x;
         position.y = y;
+        setPosition(position.x, position.y);
         facing = new Vector2(1, 1);
     }
 
@@ -118,10 +119,10 @@ public class CombatShip extends Ship {
     }
 
     @Override
-    public boolean isOnScreen() {
-        return position.x > 0
-                && position.x < Gdx.graphics.getWidth()
-                && position.y > 0
-                && position.y < Gdx.graphics.getHeight();
+    public boolean isOffScreen() {
+        return !(position.x > 0)
+                || !(position.x < Gdx.graphics.getWidth())
+                || !(position.y > 0)
+                || !(position.y < Gdx.graphics.getHeight());
     }
 }

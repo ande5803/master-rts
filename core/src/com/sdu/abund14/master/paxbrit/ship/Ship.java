@@ -40,11 +40,11 @@ public class Ship extends Sprite {
         }
     }
 
-    public boolean isOnScreen() {
-        return getX() > 0
-                && getX() < Gdx.graphics.getWidth()
-                && getY() > 0
-                && getY() < Gdx.graphics.getHeight();
+    public boolean isOffScreen() {
+        return getX() < 0
+                || getX() > Gdx.graphics.getWidth()
+                || getY() < 0
+                || getY() > Gdx.graphics.getHeight();
     }
 
     //Override to do extra things on destruction

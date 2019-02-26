@@ -29,8 +29,9 @@ public class FrigateAI extends CombatShipAI {
                     ShipType.FRIGATE,
                     ShipType.FACTORY
             );
+        } else if (target.isOffScreen()) {
+            target = null;
         }
-
         if (target != null) frigate.engage(target, shootingRange, delta);
     }
 }
