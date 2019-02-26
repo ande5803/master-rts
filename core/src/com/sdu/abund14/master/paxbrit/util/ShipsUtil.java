@@ -28,8 +28,9 @@ public class ShipsUtil {
         Ship closestShip = null;
         double closestDistance = Double.MAX_VALUE;
         for (Ship ship : possibleTargets) {
-            if (source.getPlayerNumber() == ship.getPlayerNumber()) {
-                continue; //Skip allies
+            if (source.getPlayerNumber() == ship.getPlayerNumber()
+                || !ship.isOnScreen()) {
+                continue; //Skip allies and off-screen ships
             }
             double distance = Point2D.distance(source.getX(), source.getY(), ship.getX(), ship.getY());
             if (distance < closestDistance) {

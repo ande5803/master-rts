@@ -95,10 +95,7 @@ public class Match {
     }
 
     private void endGame(boolean victory) {
-        if (victory) {
-            System.out.println("Victory!");
-        } else {
-            System.out.println("Defeat!");
-        }
+        System.out.println(victory ? "Victory!" : "Defeat!");
+        screen.endGame(victory);
     }
 }

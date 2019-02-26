@@ -1,5 +1,6 @@
 package com.sdu.abund14.master.paxbrit.ship;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
@@ -37,6 +38,13 @@ public class Ship extends Sprite {
             alive = false;
             destroy();
         }
+    }
+
+    public boolean isOnScreen() {
+        return getX() > 0
+                && getX() < Gdx.graphics.getWidth()
+                && getY() > 0
+                && getY() < Gdx.graphics.getHeight();
     }
 
     //Override to do extra things on destruction

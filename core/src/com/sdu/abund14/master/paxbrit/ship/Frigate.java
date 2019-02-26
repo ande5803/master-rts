@@ -13,7 +13,7 @@ public class Frigate extends CombatShip {
         fireRate = 5;
         reloadTime = 5;
         shotDamage = 50;
-        bulletSpeed = 50;
+        bulletSpeed = 100;
         bulletTexture = "missile";
         turnSpeed = 40;
     }

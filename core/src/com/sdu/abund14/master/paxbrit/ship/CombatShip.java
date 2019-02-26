@@ -13,10 +13,6 @@ public class CombatShip extends Ship {
     private static final float BULLET_OFFSET_DISTANCE = 30;
 
     public CombatShipAI ai;
-
-    private Vector2 facing;
-    private Vector2 position = new Vector2(0,0);
-    private Vector2 velocity = new Vector2(0,0);
     public float shotCooldownTimeLeft = 0;
     public float reloadTimeLeft = 0;
     public int ammoLeft = 0;
@@ -32,6 +28,9 @@ public class CombatShip extends Ship {
 
     private int magazineSize = 0;
     private double rangeDeviation = 30;
+    private Vector2 facing;
+    private Vector2 position = new Vector2(0,0);
+    private Vector2 velocity = new Vector2(0,0);
 
     CombatShip(String type, int playerNumber, float x, float y) {
         super(playerNumber,type + "p" + playerNumber);
@@ -116,5 +115,13 @@ public class CombatShip extends Ship {
     @Override
     public Vector2 getPosition() {
         return position;
+    }
+
+    @Override
+    public boolean isOnScreen() {
+        return position.x > 0
+                && position.x < Gdx.graphics.getWidth()
+                && position.y > 0
+                && position.y < Gdx.graphics.getHeight();
     }
 }

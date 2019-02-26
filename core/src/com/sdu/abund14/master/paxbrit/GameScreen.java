@@ -3,6 +3,7 @@ package com.sdu.abund14.master.paxbrit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
@@ -18,9 +19,12 @@ public class GameScreen implements Screen {
     private static final float BG_COLOR_GREEN = .6f;
     private static final float BG_COLOR_BLUE = .7f;
 
+    private BitmapFont font = new BitmapFont();
     private List<Processor> processors;
     private Stage stage = new Stage();
     private SpriteBatch batch;
+    private boolean gameOver = false;
+    private boolean victory;
 
     public Stage getStage() {
         return stage;
@@ -54,7 +58,16 @@ public class GameScreen implements Screen {
         for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets()) {
             bullet.draw(batch);
         }
+        if (gameOver) {
+            String endGameDisplayText = victory ? "Victory!" : "Defeat";
+            font.draw(batch, endGameDisplayText, getStage().getWidth() / 2, getStage().getHeight() / 2);
+        }
         batch.end();
+    }
+
+    void endGame(boolean victory) {
+        gameOver = true;
+        this.victory = victory;
     }
 
     @Override
