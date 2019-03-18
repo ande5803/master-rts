@@ -32,7 +32,7 @@ public class FactoryShipProcessor implements Processor {
     }
 
     private void createSprites() {
-        p1factory = new FactoryShip("factoryp1", true);
+        p1factory = new FactoryShip("factoryp1", false);
         p2factory = new FactoryShip("factoryp2", false);
         if (GameSettings.numPlayers > 2) {
             p3factory = new FactoryShip("factoryp3", false);
@@ -86,19 +86,21 @@ public class FactoryShipProcessor implements Processor {
         ListIterator<FactoryShip> iterator = PaxBritannicaGame.currentMatch.getFactories().listIterator();
         while (iterator.hasNext()) {
             FactoryShip ship = iterator.next();
-            if (ship.isDead()) {
-                iterator.remove();
-                continue;
-            }
+            synchronized (ship) {
+                if (ship.isDead()) {
+                    iterator.remove();
+                    continue;
+                }
 
-            //Add and subtract 90 degrees to point ships toward circle perimeter while rotating
-            float newAngle = ship.getRotation() + (SHIP_SPEED * delta) - 90;
-            ship.setRotation(newAngle + 90);
-            //Move in a counter-clockwise circular path
-            ship.setOriginBasedPosition(
-                    (float) (middleWidth() + Math.cos(Math.toRadians(newAngle)) * RADIUS),
-                    (float) (middleHeight() + Math.sin(Math.toRadians(newAngle)) * RADIUS)
-            );
+                //Add and subtract 90 degrees to point ships toward circle perimeter while rotating
+                float newAngle = ship.getRotation() + (SHIP_SPEED * delta) - 90;
+                ship.setRotation(newAngle + 90);
+                //Move in a counter-clockwise circular path
+                ship.setOriginBasedPosition(
+                        (float) (middleWidth() + Math.cos(Math.toRadians(newAngle)) * RADIUS),
+                        (float) (middleHeight() + Math.sin(Math.toRadians(newAngle)) * RADIUS)
+                );
+            }
         }
     }
 

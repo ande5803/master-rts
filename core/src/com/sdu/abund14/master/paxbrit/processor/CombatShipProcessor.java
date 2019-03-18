@@ -14,16 +14,18 @@ public class CombatShipProcessor implements Processor {
     public void process(float delta) {
         removeDeadShips();
         for (CombatShip ship : PaxBritannicaGame.currentMatch.getCombatShips()) {
-            ship.ai.update(delta);
-            if (ship.shotCooldownTimeLeft > 0) {
-                ship.shotCooldownTimeLeft -= delta;
-            } else {
-                ship.shotCooldownTimeLeft = 0;
-            }
-            if (ship.reloadTimeLeft > 0) {
-                ship.reloadTimeLeft -= delta;
-            } else if (ship.ammoLeft <= 0) {
-                ship.reload();
+            synchronized (ship) {
+                ship.ai.update(delta);
+                if (ship.shotCooldownTimeLeft > 0) {
+                    ship.shotCooldownTimeLeft -= delta;
+                } else {
+                    ship.shotCooldownTimeLeft = 0;
+                }
+                if (ship.reloadTimeLeft > 0) {
+                    ship.reloadTimeLeft -= delta;
+                } else if (ship.ammoLeft <= 0) {
+                    ship.reload();
+                }
             }
         }
     }

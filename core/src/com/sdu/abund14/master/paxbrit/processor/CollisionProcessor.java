@@ -14,14 +14,18 @@ public class CollisionProcessor implements Processor {
     public void process(float delta) {
         for (int i = 0; i < match.getBullets().size(); i++) {
             Bullet bullet = match.getBullets().get(i);
-            for (Ship ship : match.getAllShips()) {
-                if (bullet.getPlayerNumber() == ship.getPlayerNumber()) {
-                    continue; //Skip friendly fire collisions
-                }
-                //TODO Use something more precise than bounding rectangles
-                if (bullet.getBoundingRectangle().overlaps(ship.getBoundingRectangle())) {
-                    ship.takeDamage(bullet.getDamage());
-                    bullet.destroy();
+            synchronized (bullet) {
+                for (Ship ship : match.getAllShips()) {
+                    synchronized (ship) {
+                        if (bullet.getPlayerNumber() == ship.getPlayerNumber()) {
+                            continue; //Skip friendly fire collisions
+                        }
+                        //TODO Use something more precise than bounding rectangles
+                        if (bullet.getBoundingRectangle().overlaps(ship.getBoundingRectangle())) {
+                            ship.takeDamage(bullet.getDamage());
+                            bullet.destroy();
+                        }
+                    }
                 }
             }
         }

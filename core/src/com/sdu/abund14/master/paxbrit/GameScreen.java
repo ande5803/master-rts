@@ -13,14 +13,17 @@ import com.sdu.abund14.master.paxbrit.ship.Ship;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.*;
 
 public class GameScreen implements Screen {
     private static final float BG_COLOR_RED = .3f;
     private static final float BG_COLOR_GREEN = .6f;
     private static final float BG_COLOR_BLUE = .7f;
+    private static final long PROCESSOR_EXECUTION_TIMEOUT_MILLIS = 10;
 
     private BitmapFont font = new BitmapFont();
     private List<Processor> processors;
+    private ExecutorService service;
     private Stage stage = new Stage();
     private SpriteBatch batch;
     private boolean gameOver = false;
@@ -34,6 +37,7 @@ public class GameScreen implements Screen {
     public void show() {
         processors = new LinkedList<Processor>();
         batch = new SpriteBatch();
+        service = Executors.newCachedThreadPool();
         processors.add(new FactoryShipProcessor());
         processors.add(new CombatShipProcessor());
         processors.add(new BulletProcessor());
@@ -43,24 +47,46 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(final float delta) {
         stage.act(delta);
         Gdx.gl.glClearColor(BG_COLOR_RED, BG_COLOR_GREEN, BG_COLOR_BLUE, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        for (Processor processor : processors) {
-            processor.process(delta);
+
+        ExecutorCompletionService<Runnable> ecs = new ExecutorCompletionService<Runnable>(service);
+        int totalTasks = 0;
+        for (final Processor processor : processors) {
+            ecs.submit(new Runnable() {
+                @Override
+                public void run() {
+                    processor.process(delta);
+                }
+            }, null);
+            totalTasks++;
         }
         stage.draw();
         batch.begin();
-        for (Ship ship : PaxBritannicaGame.currentMatch.getAllShips()) {
-            ship.draw(batch, 1);
-        }
-        for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets()) {
-            bullet.draw(batch);
-        }
-        if (gameOver) {
-            String endGameDisplayText = victory ? "Victory!" : "Defeat";
-            font.draw(batch, endGameDisplayText, getStage().getWidth() / 2, getStage().getHeight() / 2);
+        ecs.submit(new Runnable() {
+            @Override
+            public void run() {
+                for (Ship ship : PaxBritannicaGame.currentMatch.getAllShips()) {
+                    ship.draw(batch, 1);
+                }
+                for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets()) {
+                    bullet.draw(batch);
+                }
+                if (gameOver) {
+                    String endGameDisplayText = victory ? "Victory!" : "Defeat";
+                    font.draw(batch, endGameDisplayText, getStage().getWidth() / 2, getStage().getHeight() / 2);
+                }
+            }
+        }, null);
+        totalTasks++;
+        for (int i = 0; i < totalTasks; i++) {
+            try {
+                ecs.take();
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
         }
         batch.end();
     }

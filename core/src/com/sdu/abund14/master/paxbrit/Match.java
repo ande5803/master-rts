@@ -31,28 +31,28 @@ public class Match {
         return fighters;
     }
 
-    public List<Bomber> getBombers() {
+    public synchronized List<Bomber> getBombers() {
         return bombers;
     }
 
-    public List<Frigate> getFrigates() {
+    public synchronized List<Frigate> getFrigates() {
         return frigates;
     }
 
-    public List<FactoryShip> getFactories() {
+    public synchronized List<FactoryShip> getFactories() {
         return factories;
     }
 
-    public List<Bullet> getBullets() { return bullets; }
+    public synchronized List<Bullet> getBullets() { return bullets; }
 
-    public List<Ship> getAllShips() {
+    public synchronized List<Ship> getAllShips() {
         List<Ship> ships = new LinkedList<Ship>();
         ships.addAll(getCombatShips());
         ships.addAll(factories);
         return ships;
     }
 
-    public List<CombatShip> getCombatShips() {
+    public synchronized List<CombatShip> getCombatShips() {
         List<CombatShip> ships = new LinkedList<CombatShip>();
         ships.addAll(fighters);
         ships.addAll(bombers);
@@ -60,7 +60,7 @@ public class Match {
         return ships;
     }
 
-    public void addShip(Ship ship) {
+    public synchronized void addShip(Ship ship) {
         if (ship instanceof Fighter) {
             fighters.add((Fighter) ship);
         } else if (ship instanceof Bomber) {
@@ -72,7 +72,7 @@ public class Match {
         }
     }
 
-    public void addBullet(Bullet bullet) {
+    public synchronized void addBullet(Bullet bullet) {
         bullets.add(bullet);
     }
 
