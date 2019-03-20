@@ -32,7 +32,7 @@ public class FactoryShipProcessor implements Processor {
     }
 
     private void createSprites() {
-        p1factory = new FactoryShip("factoryp1", true);
+        p1factory = new FactoryShip("factoryp1", false);
         p2factory = new FactoryShip("factoryp2", false);
         if (GameSettings.numPlayers > 2) {
             p3factory = new FactoryShip("factoryp3", false);
