@@ -12,7 +12,7 @@ import java.util.List;
 public class OpponentProcessor implements Processor {
 
     private List<Opponent> opponents;
-    private float aiProductionDelay = 0.5f;
+    private float aiProductionDelay = 0.5f / 5;
 
     private void init() {
         //Instantiate opponents and make first choice
