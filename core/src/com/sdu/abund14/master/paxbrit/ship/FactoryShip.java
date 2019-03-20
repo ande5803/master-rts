@@ -17,10 +17,10 @@ public class FactoryShip extends Ship {
     private static final float BUTTON_OFFSET_DISTANCE = 4.6f;
     private static int count = 0;
 
-    private float fighterSpawnTime = 0.8f;
-    private float bomberSpawnTime = 2.7f;
-    private float frigateSpawnTime = 5.8f;
-    private float upgradeTime = 17.3f;
+    private float fighterSpawnTime = 0.8f / 5;
+    private float bomberSpawnTime = 2.7f / 5;
+    private float frigateSpawnTime = 5.8f / 5;
+    private float upgradeTime = 17.3f / 5;
 
     private ProductionButton button;
     private TextureRegionProvider textureRegionProvider = TextureRegionProvider.getInstance();
@@ -31,7 +31,7 @@ public class FactoryShip extends Ship {
         super(count + 1, textureName);
         count++;
         type = ShipType.FACTORY;
-        maxHealth = currentHealth = 25000;
+        maxHealth = currentHealth = 25000 * 20;
         this.playerControlled = playerControlled;
         if (playerControlled) {
             button = new ProductionButton(this);

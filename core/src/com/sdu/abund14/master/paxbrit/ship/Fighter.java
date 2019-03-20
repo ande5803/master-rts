@@ -8,7 +8,7 @@ public class Fighter extends CombatShip {
         super("fighter", playerNumber, x, y);
         ai = new FighterAI(this);
         type = ShipType.FIGHTER;
-        maxHealth = currentHealth = 40;
+        maxHealth = currentHealth = 40 * 20;
         movementSpeed = 80;
         setMagazineSize(5);
         fireRate = 2;

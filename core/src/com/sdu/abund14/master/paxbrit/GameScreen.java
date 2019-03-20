@@ -28,6 +28,8 @@ public class GameScreen implements Screen {
     private float totalFPS = 0;
     private int totalFrames = 0;
     private float averageFPS;
+    private float totalNanos = 0;
+    private float avgNanos;
 
     public Stage getStage() {
         return stage;
@@ -51,6 +53,8 @@ public class GameScreen implements Screen {
         totalFrames++;
         averageFPS = totalFPS / totalFrames;
 
+        long startTime = System.nanoTime();
+
         stage.act(delta);
         Gdx.gl.glClearColor(BG_COLOR_RED, BG_COLOR_GREEN, BG_COLOR_BLUE, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -70,6 +74,10 @@ public class GameScreen implements Screen {
             font.draw(batch, endGameDisplayText, getStage().getWidth() / 2, getStage().getHeight() / 2);
         }
         batch.end();
+
+        totalNanos += System.nanoTime() - startTime;
+        avgNanos = totalNanos / totalFrames;
+        System.out.println(avgNanos);
     }
 
     void endGame(boolean victory) {
