@@ -28,6 +28,12 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private boolean gameOver = false;
     private boolean victory;
+    private float totalFPS = 0;
+    private int totalFrames = 0;
+    private float averageFPS;
+    private float totalNanos = 0;
+    private int totalCalls = 0;
+    private float avgNanos;
 
     public Stage getStage() {
         return stage;
@@ -48,12 +54,19 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(final float delta) {
+        totalFPS += 1 / delta;
+        totalFrames++;
+        averageFPS = totalFPS / totalFrames;
+
+        long startTime = System.nanoTime();
+
         stage.act(delta);
         Gdx.gl.glClearColor(BG_COLOR_RED, BG_COLOR_GREEN, BG_COLOR_BLUE, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         ExecutorCompletionService<Runnable> ecs = new ExecutorCompletionService<Runnable>(service);
         int totalTasks = 0;
+        //Delegate each processor task to a thread
         for (final Processor processor : processors) {
             ecs.submit(new Runnable() {
                 @Override
@@ -63,6 +76,7 @@ public class GameScreen implements Screen {
             }, null);
             totalTasks++;
         }
+
         stage.draw();
         batch.begin();
         ecs.submit(new Runnable() {
@@ -74,13 +88,11 @@ public class GameScreen implements Screen {
                 for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets()) {
                     bullet.draw(batch);
                 }
-                if (gameOver) {
-                    String endGameDisplayText = victory ? "Victory!" : "Defeat";
-                    font.draw(batch, endGameDisplayText, getStage().getWidth() / 2, getStage().getHeight() / 2);
-                }
             }
         }, null);
         totalTasks++;
+
+        //Block until all worker threads have completed their work
         for (int i = 0; i < totalTasks; i++) {
             try {
                 ecs.take();
@@ -88,12 +100,23 @@ public class GameScreen implements Screen {
                 System.out.println(e.getMessage());
             }
         }
+
+        if (gameOver) {
+            String endGameDisplayText = victory ? "Victory!" : "Defeat";
+            font.draw(batch, endGameDisplayText, getStage().getWidth() / 2, getStage().getHeight() / 2);
+        }
         batch.end();
+
+        totalNanos += System.nanoTime() - startTime;
+        totalCalls++;
+        avgNanos = totalNanos / totalCalls;
+        System.out.println(avgNanos);
     }
 
     void endGame(boolean victory) {
         gameOver = true;
         this.victory = victory;
+        System.out.println(averageFPS + " FPS");
     }
 
     @Override

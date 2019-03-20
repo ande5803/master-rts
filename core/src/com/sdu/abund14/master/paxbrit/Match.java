@@ -3,64 +3,64 @@ package com.sdu.abund14.master.paxbrit;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.ship.*;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Match {
-    private List<Fighter> fighters;
-    private List<Bomber> bombers;
-    private List<Frigate> frigates;
-    private List<FactoryShip> factories;
-    private List<Bullet> bullets;
+    private Queue<Fighter> fighters;
+    private Queue<Bomber> bombers;
+    private Queue<Frigate> frigates;
+    private Queue<FactoryShip> factories;
+    private Queue<Bullet> bullets;
     private GameScreen screen;
 
     Match(GameScreen screen) {
         this.screen = screen;
-        fighters = new LinkedList<Fighter>();
-        bombers = new LinkedList<Bomber>();
-        frigates = new LinkedList<Frigate>();
-        factories = new LinkedList<FactoryShip>();
-        bullets = new LinkedList<Bullet>();
+        fighters = new ConcurrentLinkedQueue<Fighter>();
+        bombers = new ConcurrentLinkedQueue<Bomber>();
+        frigates = new ConcurrentLinkedQueue<Frigate>();
+        factories = new ConcurrentLinkedQueue<FactoryShip>();
+        bullets = new ConcurrentLinkedQueue<Bullet>();
     }
 
     public GameScreen getScreen() {
         return screen;
     }
 
-    public List<Fighter> getFighters() {
+    public Queue<Fighter> getFighters() {
         return fighters;
     }
 
-    public synchronized List<Bomber> getBombers() {
+    public Queue<Bomber> getBombers() {
         return bombers;
     }
 
-    public synchronized List<Frigate> getFrigates() {
+    public Queue<Frigate> getFrigates() {
         return frigates;
     }
 
-    public synchronized List<FactoryShip> getFactories() {
+    public Queue<FactoryShip> getFactories() {
         return factories;
     }
 
-    public synchronized List<Bullet> getBullets() { return bullets; }
+    public Queue<Bullet> getBullets() { return bullets; }
 
-    public synchronized List<Ship> getAllShips() {
-        List<Ship> ships = new LinkedList<Ship>();
+    public Queue<Ship> getAllShips() {
+        Queue<Ship> ships = new ConcurrentLinkedQueue<Ship>();
         ships.addAll(getCombatShips());
         ships.addAll(factories);
         return ships;
     }
 
-    public synchronized List<CombatShip> getCombatShips() {
-        List<CombatShip> ships = new LinkedList<CombatShip>();
+    public Queue<CombatShip> getCombatShips() {
+        Queue<CombatShip> ships = new ConcurrentLinkedQueue<CombatShip>();
         ships.addAll(fighters);
         ships.addAll(bombers);
         ships.addAll(frigates);
         return ships;
     }
 
-    public synchronized void addShip(Ship ship) {
+    public void addShip(Ship ship) {
         if (ship instanceof Fighter) {
             fighters.add((Fighter) ship);
         } else if (ship instanceof Bomber) {
@@ -72,7 +72,7 @@ public class Match {
         }
     }
 
-    public synchronized void addBullet(Bullet bullet) {
+    public void addBullet(Bullet bullet) {
         bullets.add(bullet);
     }
 

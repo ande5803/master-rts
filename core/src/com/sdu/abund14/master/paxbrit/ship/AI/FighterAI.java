@@ -7,9 +7,10 @@ import com.sdu.abund14.master.paxbrit.ship.ShipType;
 import com.sdu.abund14.master.paxbrit.util.ShipsUtil;
 
 import java.util.List;
+import java.util.Queue;
 
 public class FighterAI extends CombatShipAI {
-    private List<Ship> ships;
+    private Queue<Ship> ships;
     private float shootingRange = 200;
     private Fighter fighter;
 

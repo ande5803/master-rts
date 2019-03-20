@@ -6,6 +6,7 @@ import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
+import java.util.Iterator;
 import java.util.ListIterator;
 
 public class FactoryShipProcessor implements Processor {
@@ -83,24 +84,22 @@ public class FactoryShipProcessor implements Processor {
 
     @Override
     public void process(float delta) {
-        ListIterator<FactoryShip> iterator = PaxBritannicaGame.currentMatch.getFactories().listIterator();
+        Iterator<FactoryShip> iterator = PaxBritannicaGame.currentMatch.getFactories().iterator();
         while (iterator.hasNext()) {
             FactoryShip ship = iterator.next();
-            synchronized (ship) {
-                if (ship.isDead()) {
-                    iterator.remove();
-                    continue;
-                }
-
-                //Add and subtract 90 degrees to point ships toward circle perimeter while rotating
-                float newAngle = ship.getRotation() + (SHIP_SPEED * delta) - 90;
-                ship.setRotation(newAngle + 90);
-                //Move in a counter-clockwise circular path
-                ship.setOriginBasedPosition(
-                        (float) (middleWidth() + Math.cos(Math.toRadians(newAngle)) * RADIUS),
-                        (float) (middleHeight() + Math.sin(Math.toRadians(newAngle)) * RADIUS)
-                );
+            if (ship.isDead()) {
+                iterator.remove();
+                continue;
             }
+
+            //Add and subtract 90 degrees to point ships toward circle perimeter while rotating
+            float newAngle = ship.getRotation() + (SHIP_SPEED * delta) - 90;
+            ship.setRotation(newAngle + 90);
+            //Move in a counter-clockwise circular path
+            ship.setOriginBasedPosition(
+                    (float) (middleWidth() + Math.cos(Math.toRadians(newAngle)) * RADIUS),
+                    (float) (middleHeight() + Math.sin(Math.toRadians(newAngle)) * RADIUS)
+            );
         }
     }
 
