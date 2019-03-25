@@ -70,7 +70,7 @@ public class GameScreen implements Screen {
             bullet.draw(batch);
         }
         if (gameOver) {
-            String endGameDisplayText = victory ? "Victory!" : "Defeat";
+            String endGameDisplayText = victory ? "Victory!" : "Defeat!";
             font.draw(batch, endGameDisplayText, getStage().getWidth() / 2, getStage().getHeight() / 2);
         }
         batch.end();

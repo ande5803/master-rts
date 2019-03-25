@@ -5,55 +5,56 @@ import com.sdu.abund14.master.paxbrit.ship.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Match {
-    private List<Fighter> fighters;
-    private List<Bomber> bombers;
-    private List<Frigate> frigates;
-    private List<FactoryShip> factories;
-    private List<Bullet> bullets;
+    private ConcurrentLinkedQueue<Fighter> fighters;
+    private ConcurrentLinkedQueue<Bomber> bombers;
+    private ConcurrentLinkedQueue<Frigate> frigates;
+    private ConcurrentLinkedQueue<FactoryShip> factories;
+    private ConcurrentLinkedQueue<Bullet> bullets;
     private GameScreen screen;
 
     Match(GameScreen screen) {
         this.screen = screen;
-        fighters = new LinkedList<Fighter>();
-        bombers = new LinkedList<Bomber>();
-        frigates = new LinkedList<Frigate>();
-        factories = new LinkedList<FactoryShip>();
-        bullets = new LinkedList<Bullet>();
+        fighters = new ConcurrentLinkedQueue<>();
+        bombers = new ConcurrentLinkedQueue<>();
+        frigates = new ConcurrentLinkedQueue<>();
+        factories = new ConcurrentLinkedQueue<>();
+        bullets = new ConcurrentLinkedQueue<>();
     }
 
     public GameScreen getScreen() {
         return screen;
     }
 
-    public List<Fighter> getFighters() {
+    public ConcurrentLinkedQueue<Fighter> getFighters() {
         return fighters;
     }
 
-    public List<Bomber> getBombers() {
+    public ConcurrentLinkedQueue<Bomber> getBombers() {
         return bombers;
     }
 
-    public List<Frigate> getFrigates() {
+    public ConcurrentLinkedQueue<Frigate> getFrigates() {
         return frigates;
     }
 
-    public List<FactoryShip> getFactories() {
+    public ConcurrentLinkedQueue<FactoryShip> getFactories() {
         return factories;
     }
 
-    public List<Bullet> getBullets() { return bullets; }
+    public ConcurrentLinkedQueue<Bullet> getBullets() { return bullets; }
 
-    public List<Ship> getAllShips() {
-        List<Ship> ships = new LinkedList<Ship>();
+    public ConcurrentLinkedQueue<Ship> getAllShips() {
+        ConcurrentLinkedQueue<Ship> ships = new ConcurrentLinkedQueue<>();
         ships.addAll(getCombatShips());
         ships.addAll(factories);
         return ships;
     }
 
-    public List<CombatShip> getCombatShips() {
-        List<CombatShip> ships = new LinkedList<CombatShip>();
+    public ConcurrentLinkedQueue<CombatShip> getCombatShips() {
+        ConcurrentLinkedQueue<CombatShip> ships = new ConcurrentLinkedQueue<>();
         ships.addAll(fighters);
         ships.addAll(bombers);
         ships.addAll(frigates);

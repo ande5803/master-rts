@@ -10,11 +10,9 @@ import java.util.ListIterator;
 public class BulletProcessor implements Processor {
 
     public void process(float delta) {
-        ListIterator<Bullet> bulletIterator = PaxBritannicaGame.currentMatch.getBullets().listIterator();
-        while (bulletIterator.hasNext()) {
-            Bullet bullet = bulletIterator.next();
+        for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets()) {
             if (!bullet.isAlive()) {
-                bulletIterator.remove();
+                PaxBritannicaGame.currentMatch.getBullets().remove(bullet);
                 continue;
             }
             //Propagate forward

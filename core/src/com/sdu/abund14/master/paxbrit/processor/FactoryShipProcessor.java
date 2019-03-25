@@ -83,11 +83,9 @@ public class FactoryShipProcessor implements Processor {
 
     @Override
     public void process(float delta) {
-        ListIterator<FactoryShip> iterator = PaxBritannicaGame.currentMatch.getFactories().listIterator();
-        while (iterator.hasNext()) {
-            FactoryShip ship = iterator.next();
+        for (FactoryShip ship : PaxBritannicaGame.currentMatch.getFactories()) {
             if (ship.isDead()) {
-                iterator.remove();
+                PaxBritannicaGame.currentMatch.getFactories().remove(ship);
                 continue;
             }
 
@@ -100,6 +98,8 @@ public class FactoryShipProcessor implements Processor {
                     (float) (middleHeight() + Math.sin(Math.toRadians(newAngle)) * RADIUS)
             );
         }
+
+
     }
 
     private int middleWidth() {

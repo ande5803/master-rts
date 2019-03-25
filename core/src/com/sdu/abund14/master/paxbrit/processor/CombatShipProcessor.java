@@ -2,44 +2,76 @@ package com.sdu.abund14.master.paxbrit.processor;
 
 import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
-import com.sdu.abund14.master.paxbrit.ship.Bomber;
-import com.sdu.abund14.master.paxbrit.ship.CombatShip;
-import com.sdu.abund14.master.paxbrit.ship.Fighter;
-import com.sdu.abund14.master.paxbrit.ship.Frigate;
+import com.sdu.abund14.master.paxbrit.ship.*;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ForkJoinTask;
+import java.util.concurrent.RecursiveAction;
 
 public class CombatShipProcessor implements Processor {
     @Override
     public void process(float delta) {
         removeDeadShips();
-        for (CombatShip ship : PaxBritannicaGame.currentMatch.getCombatShips()) {
-            ship.ai.update(delta);
-            if (ship.shotCooldownTimeLeft > 0) {
-                ship.shotCooldownTimeLeft -= delta;
-            } else {
-                ship.shotCooldownTimeLeft = 0;
-            }
-            if (ship.reloadTimeLeft > 0) {
-                ship.reloadTimeLeft -= delta;
-            } else if (ship.ammoLeft <= 0) {
-                ship.reload();
-            }
-        }
+        PaxBritannicaGame.forkJoinPool.submit(
+                new ProcessCombatShipAction(PaxBritannicaGame.currentMatch.getCombatShips(), delta)
+        );
     }
 
     private void removeDeadShips() {
-        ListIterator<Fighter> fighterListIterator = PaxBritannicaGame.currentMatch.getFighters().listIterator();
-        while (fighterListIterator.hasNext()) {
-            if (fighterListIterator.next().isDead()) fighterListIterator.remove();
+        PaxBritannicaGame.currentMatch.getFighters().removeIf(Ship::isDead);
+        PaxBritannicaGame.currentMatch.getBombers().removeIf(Ship::isDead);
+        PaxBritannicaGame.currentMatch.getFrigates().removeIf(Ship::isDead);
+    }
+
+    class ProcessCombatShipAction extends RecursiveAction {
+
+        ConcurrentLinkedQueue<CombatShip> ships;
+        float delta;
+        int shipThreshold = 20;
+
+        ProcessCombatShipAction(ConcurrentLinkedQueue<CombatShip> ships, float delta) {
+            this.ships = ships;
+            this.delta = delta;
         }
-        ListIterator<Bomber> bomberListIterator = PaxBritannicaGame.currentMatch.getBombers().listIterator();
-        while (bomberListIterator.hasNext()) {
-            if (bomberListIterator.next().isDead()) bomberListIterator.remove();
+
+        @Override
+        protected void compute() {
+            if (ships.size() > shipThreshold) {
+                ForkJoinTask.invokeAll(createSubTasks());
+            } else {
+                processSubTask(ships);
+            }
         }
-        ListIterator<Frigate> frigateListIterator = PaxBritannicaGame.currentMatch.getFrigates().listIterator();
-        while (frigateListIterator.hasNext()) {
-            if (frigateListIterator.next().isDead()) frigateListIterator.remove();
+
+        List<ProcessCombatShipAction> createSubTasks() {
+            List<ProcessCombatShipAction> subTasks = new LinkedList<>();
+            ConcurrentLinkedQueue<CombatShip> subQueueOne = ships;
+            ConcurrentLinkedQueue<CombatShip> subQueueTwo = new ConcurrentLinkedQueue<>();
+            for (int i = 0; i < shipThreshold / 2; i++) {
+                subQueueTwo.add(subQueueOne.remove());
+            }
+            subTasks.add(new ProcessCombatShipAction(subQueueOne, delta));
+            subTasks.add(new ProcessCombatShipAction(subQueueTwo, delta));
+            return subTasks;
+        }
+
+        void processSubTask(ConcurrentLinkedQueue<CombatShip> ships) {
+            for (CombatShip ship : ships) {
+                ship.ai.update(delta);
+                if (ship.shotCooldownTimeLeft > 0) {
+                    ship.shotCooldownTimeLeft -= delta;
+                } else {
+                    ship.shotCooldownTimeLeft = 0;
+                }
+                if (ship.reloadTimeLeft > 0) {
+                    ship.reloadTimeLeft -= delta;
+                } else if (ship.ammoLeft <= 0) {
+                    ship.reload();
+                }
+            }
         }
     }
 }

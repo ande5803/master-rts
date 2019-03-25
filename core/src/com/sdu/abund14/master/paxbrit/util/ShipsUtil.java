@@ -6,6 +6,7 @@ import com.sdu.abund14.master.paxbrit.ship.ShipType;
 
 import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ShipsUtil {
 
@@ -21,7 +22,7 @@ public class ShipsUtil {
     }
 
     private static Ship getNearestEnemyShipOfType(Ship source, ShipType type) {
-        List<? extends Ship> possibleTargets = getShipsOfType(type);
+        ConcurrentLinkedQueue<? extends Ship> possibleTargets = getShipsOfType(type);
         if (possibleTargets == null || possibleTargets.size() == 0) {
             return null;
         }
@@ -41,7 +42,7 @@ public class ShipsUtil {
         return closestShip;
     }
 
-    private static List<? extends Ship> getShipsOfType(ShipType type) {
+    private static ConcurrentLinkedQueue<? extends Ship> getShipsOfType(ShipType type) {
         switch (type) {
             case FIGHTER:
                 return PaxBritannicaGame.currentMatch.getFighters();
