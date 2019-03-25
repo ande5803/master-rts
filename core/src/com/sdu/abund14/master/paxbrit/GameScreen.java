@@ -28,8 +28,8 @@ public class GameScreen implements Screen {
     private float totalFPS = 0;
     private int totalFrames = 0;
     private float averageFPS;
-    private float totalNanos = 0;
-    private float avgNanos;
+    private float totalDiff = 0;
+    private float avgDiff;
 
     public Stage getStage() {
         return stage;
@@ -75,9 +75,10 @@ public class GameScreen implements Screen {
         }
         batch.end();
 
-        totalNanos += System.nanoTime() - startTime;
-        avgNanos = totalNanos / totalFrames;
-        System.out.println(avgNanos);
+        long nanos = System.nanoTime() - startTime;
+        long deltaNanos = (long) (delta * 1000000000);
+        totalDiff += deltaNanos - nanos;
+        System.out.println(totalDiff / totalFrames);
     }
 
     void endGame(boolean victory) {

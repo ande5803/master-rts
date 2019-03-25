@@ -7,7 +7,7 @@ public class Bomber extends CombatShip {
         super("bomber", playerNumber, x, y);
         ai = new BomberAI(this);
         type = ShipType.BOMBER;
-        maxHealth = currentHealth = 440 * 20;
+        maxHealth = currentHealth = 440;
         movementSpeed = 60;
         turnSpeed = 75;
         setMagazineSize(4);
