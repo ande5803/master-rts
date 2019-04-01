@@ -20,7 +20,7 @@ public class BomberAI extends CombatShipAI {
 
     @Override
     public void update(float delta) {
-        List<Ship> ships = PaxBritannicaGame.currentMatch.getAllShips();
+        List<Ship> ships = PaxBritannicaGame.currentMatch.getShips();
         if (target == null || !ships.contains(target)) {
             target = ShipsUtil.getNearestEnemyShipWithTypePriorities(
                     ship,
