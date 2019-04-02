@@ -5,12 +5,15 @@ import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 
 public class BulletProcessor implements Processor {
 
     public void process(float delta) {
         ListIterator<Bullet> bulletIterator = PaxBritannicaGame.currentMatch.getBullets().listIterator();
+        List<Bullet> bulletsToRemove = new LinkedList<Bullet>();
         while (bulletIterator.hasNext()) {
             Bullet bullet = bulletIterator.next();
 
@@ -25,9 +28,11 @@ public class BulletProcessor implements Processor {
                 bullet.getX() > Gdx.graphics.getWidth() ||
                 bullet.getY() < 0 ||
                 bullet.getY() > Gdx.graphics.getHeight()) {
-                PaxBritannicaGame.currentMatch.removeBullet(bullet);
-                bulletIterator.remove();
+                bulletsToRemove.add(bullet);
             }
+        }
+        for (Bullet bullet : bulletsToRemove) {
+            PaxBritannicaGame.currentMatch.removeBullet(bullet);
         }
     }
 }

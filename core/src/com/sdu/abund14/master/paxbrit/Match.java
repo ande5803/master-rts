@@ -117,6 +117,7 @@ public class Match {
                 numPlayer3Ships--;
                 break;
         }
+        ships.remove(ship);
     }
 
     public void addBullet(Bullet bullet) {

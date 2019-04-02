@@ -13,7 +13,6 @@ public class CollisionProcessor implements Processor {
 
     @Override
     public void process(float delta) {
-        List<Bullet> bulletsToRemove = new LinkedList<Bullet>();
         List<Ship> ships = PaxBritannicaGame.currentMatch.getShips();
         List<Bullet> bullets = PaxBritannicaGame.currentMatch.getBullets();
         int p1Ships = PaxBritannicaGame.currentMatch.getNumPlayer1Ships();
@@ -25,16 +24,19 @@ public class CollisionProcessor implements Processor {
 
         for (int i = 0; i < ships.size(); i++) {
             Ship ship = ships.get(i);
+            List<Bullet> bulletsToRemove = new LinkedList<Bullet>();
             for (int j = 0; j < bullets.size(); j++) {
-                if (i < p1Ships) {
-                    j = p1Bullets;
-                } else if (i < p1Ships + p2Ships && j >= p1Bullets) {
-                    j = p1Bullets + p2Bullets;
-                } else if (i < p1Ships + p2Ships + p3Ships && j >= p1Bullets + p2Bullets) {
-                    j = p1Bullets + p2Bullets + p3Bullets;
-                } else if (j >= p1Bullets + p2Bullets + p3Bullets) {
+                if (i >= p1Ships + p2Ships + p3Ships && j == p1Bullets + p2Bullets + p3Bullets) {
                     break;
+                } else if (i >= p1Ships + p2Ships && j == p1Bullets + p2Bullets) {
+                    j += p3Bullets;
+                } else if (i >= p1Ships && j == p1Bullets) {
+                    j += p2Bullets;
+                } else if (i < p1Ships && j == 0) {
+                    j += p1Bullets;
                 }
+
+                if (j >= bullets.size()) break;
 
                 Bullet bullet = bullets.get(j);
                 if (bullet.getBoundingRectangle().overlaps(ship.getBoundingRectangle())) {
@@ -43,9 +45,9 @@ public class CollisionProcessor implements Processor {
                     break;
                 }
             }
-        }
-        for (Bullet bullet : bulletsToRemove) {
-            PaxBritannicaGame.currentMatch.removeBullet(bullet);
+            for (Bullet bullet : bulletsToRemove) {
+                PaxBritannicaGame.currentMatch.removeBullet(bullet);
+            }
         }
     }
 }

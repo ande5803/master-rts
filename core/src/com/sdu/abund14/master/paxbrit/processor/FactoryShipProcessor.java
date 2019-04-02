@@ -6,6 +6,8 @@ import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 
 public class FactoryShipProcessor implements Processor {
@@ -83,11 +85,10 @@ public class FactoryShipProcessor implements Processor {
 
     @Override
     public void process(float delta) {
-        ListIterator<FactoryShip> iterator = PaxBritannicaGame.currentMatch.getFactories().listIterator();
-        while (iterator.hasNext()) {
-            FactoryShip ship = iterator.next();
+        List<FactoryShip> shipsToRemove = new LinkedList<FactoryShip>();
+        for (FactoryShip ship : PaxBritannicaGame.currentMatch.getFactories()) {
             if (ship.isDead()) {
-                iterator.remove();
+                shipsToRemove.add(ship);
                 continue;
             }
 
@@ -99,6 +100,9 @@ public class FactoryShipProcessor implements Processor {
                     (float) (middleWidth() + Math.cos(Math.toRadians(newAngle)) * RADIUS),
                     (float) (middleHeight() + Math.sin(Math.toRadians(newAngle)) * RADIUS)
             );
+        }
+        for (FactoryShip ship : shipsToRemove) {
+            PaxBritannicaGame.currentMatch.removeShip(ship);
         }
     }
 
