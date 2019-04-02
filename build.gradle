@@ -59,7 +59,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        
+        compile "org.apache.commons:commons-pool2:2.2"
     }
 }
 
