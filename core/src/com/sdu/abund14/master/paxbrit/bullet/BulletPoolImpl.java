@@ -1,31 +1,35 @@
 package com.sdu.abund14.master.paxbrit.bullet;
 
 
-import org.apache.commons.pool2.impl.AbandonedConfig;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 
 class BulletPoolImpl extends GenericObjectPool<Bullet> {
 
-    private static final int MAX_BULLETS = 150;
     private BulletFactory factory;
 
-    BulletPoolImpl(BulletFactory factory) {
+    BulletPoolImpl(BulletFactory factory, int size) {
         super(factory);
         this.factory = factory;
-        setMaxTotal(MAX_BULLETS);
-        AbandonedConfig abandonedConfig = new AbandonedConfig();
-        abandonedConfig.setRemoveAbandonedOnBorrow(true);
-        abandonedConfig.setRemoveAbandonedTimeout(10000);
-        try {
-            for (int i = 0; i < MAX_BULLETS; i++) {
+        setMaxTotal(size);
+        setMaxIdle(size);
+        setBlockWhenExhausted(false);
+        setTestOnBorrow(true);
+        for (int i = 0; i < size; i++) {
+            try {
                 addObject();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            System.out.println(e.toString());
         }
     }
 
     Bullet borrow(int playerNumber, int damage, int speed, float startX, float startY, float angle, String texture) {
+//        System.out.println(getCreatedCount());
+//        System.out.println("B: " + getBorrowedCount());
+//        System.out.println("R: " + getReturnedCount());
+//        System.out.println("A: " + getNumActive());
+//        System.out.println("I: " + getNumIdle());
+
         factory.playerNumber = playerNumber;
         factory.damage = damage;
         factory.speed = speed;

@@ -1,17 +1,21 @@
 package com.sdu.abund14.master.paxbrit;
 
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
+import com.sdu.abund14.master.paxbrit.bullet.BulletPool;
 import com.sdu.abund14.master.paxbrit.ship.*;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class Match {
+    private static final int BULLET_POOL_SIZE = 200;
+
     private List<Fighter> fighters;
     private List<Bomber> bombers;
     private List<Frigate> frigates;
     private List<FactoryShip> factories;
     private List<Bullet> bullets;
+    private BulletPool bulletPool;
     private GameScreen screen;
 
     Match(GameScreen screen) {
@@ -74,6 +78,13 @@ public class Match {
 
     public void addBullet(Bullet bullet) {
         bullets.add(bullet);
+    }
+
+    public BulletPool getBulletPool() {
+        if (bulletPool == null) { //Lazy init
+            bulletPool = new BulletPool(BULLET_POOL_SIZE);
+        }
+        return bulletPool;
     }
 
     public void checkGameEndConditions() {

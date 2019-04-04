@@ -5,10 +5,10 @@ public class BulletPool {
     private final BulletPoolImpl pool;
 
     /**
-     * Wrapper object to restrict access to the actual pool object.
+     * Wrapper class to restrict access to the bullet pool implementation.
      */
-    public BulletPool() {
-        pool = new BulletPoolImpl(new BulletFactory());
+    public BulletPool(int size) {
+        pool = new BulletPoolImpl(new BulletFactory(), size);
     }
 
     public Bullet borrowBullet(int playerNumber, int damage, int speed, float startX, float startY, float angle, String texture) {

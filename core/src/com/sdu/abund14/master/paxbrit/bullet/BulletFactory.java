@@ -12,11 +12,11 @@ public class BulletFactory extends BasePooledObjectFactory<Bullet> {
     float startX;
     float startY;
     float angle;
-    String texture;
+    String texture = "laser"; //To prevent NullPointerException when creating idle objects
 
     @Override
-    public Bullet create() throws Exception {
-        return new Bullet(playerNumber, damage, speed, startX, startY, angle, texture);
+    public Bullet create() {
+        return new Bullet();
     }
 
     @Override
@@ -24,5 +24,18 @@ public class BulletFactory extends BasePooledObjectFactory<Bullet> {
         return new DefaultPooledObject<Bullet>(obj);
     }
 
+    @Override
+    public void activateObject(PooledObject<Bullet> bullet) {
+        bullet.getObject().activate(playerNumber, damage, speed, startX, startY, angle, texture);
+    }
 
+    @Override
+    public boolean validateObject(PooledObject<Bullet> bullet) {
+        return bullet.getObject().getPlayerNumber() != 0;
+    }
+
+    @Override
+    public void passivateObject(PooledObject<Bullet> bullet) {
+        bullet.getObject().reset();
+    }
 }

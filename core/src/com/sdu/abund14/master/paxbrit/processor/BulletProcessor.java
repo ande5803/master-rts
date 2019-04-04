@@ -13,7 +13,8 @@ public class BulletProcessor implements Processor {
         ListIterator<Bullet> bulletIterator = PaxBritannicaGame.currentMatch.getBullets().listIterator();
         while (bulletIterator.hasNext()) {
             Bullet bullet = bulletIterator.next();
-            if (!bullet.isAlive()) {
+            if (!bullet.isAlive() && bullet.getPlayerNumber() != 0) {
+                PaxBritannicaGame.currentMatch.getBulletPool().returnBullet(bullet);
                 bulletIterator.remove();
                 continue;
             }
