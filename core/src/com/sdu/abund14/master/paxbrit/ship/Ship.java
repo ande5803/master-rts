@@ -1,12 +1,13 @@
 package com.sdu.abund14.master.paxbrit.ship;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.sdu.abund14.master.paxbrit.GameEntity;
+import com.sdu.abund14.master.paxbrit.Grid;
 import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 
-public class Ship extends Sprite {
+public class Ship extends GameEntity {
 
     private int playerNumber;
     ShipType type;
@@ -14,8 +15,8 @@ public class Ship extends Sprite {
     int currentHealth;
     private boolean alive = true;
 
-    Ship(int playerNumber, String textureName ) {
-        super(TextureRegionProvider.getInstance().get(textureName));
+    Ship(int playerNumber, String textureName, Grid grid, float x, float y) {
+        super(TextureRegionProvider.getInstance().get(textureName), grid, x, y);
         this.playerNumber = playerNumber;
         PaxBritannicaGame.currentMatch.addShip(this);
     }

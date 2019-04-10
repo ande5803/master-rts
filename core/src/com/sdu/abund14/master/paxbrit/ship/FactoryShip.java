@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.sdu.abund14.master.paxbrit.Grid;
 import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 import com.sdu.abund14.master.paxbrit.util.MathUtil;
@@ -26,9 +27,11 @@ public class FactoryShip extends Ship {
     private TextureRegionProvider textureRegionProvider = TextureRegionProvider.getInstance();
     private long productionStartedAt = 0;
     private boolean playerControlled;
+    private Grid grid;
 
-    public FactoryShip(String textureName, boolean playerControlled) {
-        super(count + 1, textureName);
+    public FactoryShip(String textureName, boolean playerControlled, Grid grid, float x, float y) {
+        super(count + 1, textureName, grid, x, y);
+        this.grid = grid;
         count++;
         type = ShipType.FACTORY;
         maxHealth = currentHealth = 25000 * 20;
@@ -73,15 +76,15 @@ public class FactoryShip extends Ship {
     }
 
     public void spawnFrigate() {
-        new Frigate(getPlayerNumber(), getPosition().x, getPosition().y);
+        new Frigate(getPlayerNumber(), grid, getPosition().x, getPosition().y);
     }
 
     public void spawnBomber() {
-        new Bomber(getPlayerNumber(), getPosition().x, getPosition().y);
+        new Bomber(getPlayerNumber(), grid, getPosition().x, getPosition().y);
     }
 
     public void spawnFighter() {
-        new Fighter(getPlayerNumber(), getPosition().x, getPosition().y);
+        new Fighter(getPlayerNumber(), grid, getPosition().x, getPosition().y);
     }
 
     private float getButtonOffsetX() {

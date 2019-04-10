@@ -5,10 +5,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.processor.*;
+import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
 
 import java.util.LinkedList;
@@ -30,6 +33,7 @@ public class GameScreen implements Screen {
     private float averageFPS;
     private float totalNanos = 0;
     private float avgNanos;
+    private ShapeRenderer sr;
 
     public Stage getStage() {
         return stage;
@@ -45,6 +49,8 @@ public class GameScreen implements Screen {
         processors.add(new CollisionProcessor());
         processors.add(new OpponentProcessor());
         Gdx.input.setInputProcessor(stage);
+        sr = new ShapeRenderer();
+        sr.setAutoShapeType(true);
     }
 
     @Override

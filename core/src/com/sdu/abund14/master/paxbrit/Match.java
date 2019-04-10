@@ -13,6 +13,7 @@ public class Match {
     private List<FactoryShip> factories;
     private List<Bullet> bullets;
     private GameScreen screen;
+    private Grid grid;
 
     Match(GameScreen screen) {
         this.screen = screen;
@@ -21,6 +22,7 @@ public class Match {
         frigates = new LinkedList<Frigate>();
         factories = new LinkedList<FactoryShip>();
         bullets = new LinkedList<Bullet>();
+        grid = new Grid();
     }
 
     public GameScreen getScreen() {
@@ -44,6 +46,10 @@ public class Match {
     }
 
     public List<Bullet> getBullets() { return bullets; }
+
+    public Grid getGrid() {
+        return grid;
+    }
 
     public List<Ship> getAllShips() {
         List<Ship> ships = new LinkedList<Ship>();

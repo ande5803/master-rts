@@ -1,6 +1,8 @@
 package com.sdu.abund14.master.paxbrit.ship;
 
 import com.badlogic.gdx.math.Vector2;
+import com.sdu.abund14.master.paxbrit.Grid;
+import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.badlogic.gdx.Gdx;
 import com.sdu.abund14.master.paxbrit.ship.AI.CombatShipAI;
@@ -32,8 +34,8 @@ public class CombatShip extends Ship {
     private Vector2 position = new Vector2(0,0);
     private Vector2 velocity = new Vector2(0,0);
 
-    CombatShip(String type, int playerNumber, float x, float y) {
-        super(playerNumber,type + "p" + playerNumber);
+    CombatShip(String type, int playerNumber, Grid grid, float x, float y) {
+        super(playerNumber,type + "p" + playerNumber, grid, x, y);
         position.x = x;
         position.y = y;
         setPosition(position.x, position.y);
@@ -102,7 +104,16 @@ public class CombatShip extends Ship {
 
     private void shoot() {
         Vector2 bulletPosition = MathUtil.offsetVector(getX(), getY(), getRotation(), BULLET_OFFSET_DISTANCE);
-        new Bullet(getPlayerNumber(), shotDamage, bulletSpeed, bulletPosition.x, bulletPosition.y, getRotation(), bulletTexture);
+        new Bullet(
+                getPlayerNumber(),
+                shotDamage,
+                bulletSpeed,
+                PaxBritannicaGame.currentMatch.getGrid(),
+                bulletPosition.x,
+                bulletPosition.y,
+                getRotation(),
+                bulletTexture
+        );
         shotCooldownTimeLeft = 1 / fireRate;
         ammoLeft -= 1;
         if (ammoLeft <= 0) reloadTimeLeft = reloadTime;

@@ -1,11 +1,12 @@
 package com.sdu.abund14.master.paxbrit.ship;
 
+import com.sdu.abund14.master.paxbrit.Grid;
 import com.sdu.abund14.master.paxbrit.ship.AI.FighterAI;
 
 public class Fighter extends CombatShip {
 
-    Fighter(int playerNumber, float x, float y) {
-        super("fighter", playerNumber, x, y);
+    Fighter(int playerNumber, Grid grid, float x, float y) {
+        super("fighter", playerNumber, grid, x, y);
         ai = new FighterAI(this);
         type = ShipType.FIGHTER;
         maxHealth = currentHealth = 40 * 20;
