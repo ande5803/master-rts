@@ -9,24 +9,14 @@ import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 
 public class Ship extends GameEntity {
 
-    private int playerNumber;
     ShipType type;
     int maxHealth;
     int currentHealth;
     private boolean alive = true;
 
     Ship(int playerNumber, String textureName, Grid grid, float x, float y) {
-        super(TextureRegionProvider.getInstance().get(textureName), grid, x, y);
-        this.playerNumber = playerNumber;
+        super(playerNumber, TextureRegionProvider.getInstance().get(textureName), grid, x, y);
         PaxBritannicaGame.currentMatch.addShip(this);
-    }
-
-    public int getPlayerNumber() {
-        return playerNumber;
-    }
-
-    public boolean isDead() {
-        return !alive;
     }
 
     public Vector2 getPosition() {
@@ -47,7 +37,4 @@ public class Ship extends GameEntity {
                 || getY() < 0
                 || getY() > Gdx.graphics.getHeight();
     }
-
-    //Override to do extra things on destruction
-    public void destroy() {}
 }

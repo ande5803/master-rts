@@ -4,13 +4,17 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Polygon;
 
+import java.util.UUID;
+
 public class GameEntity extends Sprite {
     private Polygon collisionPolygon;
-    private GameEntity prev = null;
-    private GameEntity next = null;
+    private UUID id = UUID.randomUUID();
+    private int playerNumber;
+    private boolean alive = true;
 
-    public GameEntity(TextureRegion region, Grid grid, float x, float y) {
+    public GameEntity(int playerNumber, TextureRegion region, Grid grid, float x, float y) {
         super(region);
+        this.playerNumber = playerNumber;
 
         collisionPolygon = new Polygon(new float[] {
                 0, 0,
@@ -23,24 +27,24 @@ public class GameEntity extends Sprite {
         grid.add(this);
     }
 
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
     public Polygon getCollisionPolygon() {
         return collisionPolygon;
     }
 
-    public GameEntity getPrevious() {
-        return prev;
+    public boolean isDead() {
+        return !alive;
     }
 
-    public void setPrevious(GameEntity prev) {
-        this.prev = prev;
-    }
-
-    public GameEntity getNext() {
-        return next;
-    }
-
-    public void setNext(GameEntity next) {
-        this.next = next;
+    public void destroy() {
+        alive = false;
     }
 
     @Override

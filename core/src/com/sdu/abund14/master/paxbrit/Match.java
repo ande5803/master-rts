@@ -5,6 +5,7 @@ import com.sdu.abund14.master.paxbrit.ship.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 public class Match {
     private List<Fighter> fighters;
@@ -103,5 +104,15 @@ public class Match {
     private void endGame(boolean victory) {
         System.out.println(victory ? "Victory!" : "Defeat!");
         screen.endGame(victory);
+    }
+
+    public GameEntity getEntityById(UUID id) {
+        for (Ship ship : getAllShips()) {
+            if (ship.getId().equals(id)) return ship;
+        }
+        for (Bullet bullet : getBullets()) {
+            if (bullet.getId().equals(id)) return bullet;
+        }
+        return null;
     }
 }

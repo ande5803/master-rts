@@ -5,13 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.processor.*;
-import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
 
 import java.util.LinkedList;
@@ -28,12 +25,6 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private boolean gameOver = false;
     private boolean victory;
-    private float totalFPS = 0;
-    private int totalFrames = 0;
-    private float averageFPS;
-    private float totalNanos = 0;
-    private float avgNanos;
-    private ShapeRenderer sr;
 
     public Stage getStage() {
         return stage;
@@ -49,17 +40,10 @@ public class GameScreen implements Screen {
         processors.add(new CollisionProcessor());
         processors.add(new OpponentProcessor());
         Gdx.input.setInputProcessor(stage);
-        sr = new ShapeRenderer();
-        sr.setAutoShapeType(true);
     }
 
     @Override
     public void render(float delta) {
-        totalFPS += 1 / delta;
-        totalFrames++;
-        averageFPS = totalFPS / totalFrames;
-
-        long startTime = System.nanoTime();
 
         stage.act(delta);
         Gdx.gl.glClearColor(BG_COLOR_RED, BG_COLOR_GREEN, BG_COLOR_BLUE, 0);
@@ -80,16 +64,11 @@ public class GameScreen implements Screen {
             font.draw(batch, endGameDisplayText, getStage().getWidth() / 2, getStage().getHeight() / 2);
         }
         batch.end();
-
-        totalNanos += System.nanoTime() - startTime;
-        avgNanos = totalNanos / totalFrames;
-        System.out.println(avgNanos);
     }
 
     void endGame(boolean victory) {
         gameOver = true;
         this.victory = victory;
-        System.out.println(averageFPS + " FPS");
     }
 
     @Override

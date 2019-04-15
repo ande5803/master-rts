@@ -3,11 +3,13 @@ package com.sdu.abund14.master.paxbrit.processor;
 import com.badlogic.gdx.math.Intersector;
 import com.sdu.abund14.master.paxbrit.GameEntity;
 import com.sdu.abund14.master.paxbrit.Grid;
-import com.sdu.abund14.master.paxbrit.Match;
 import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class CollisionProcessor implements Processor {
 
@@ -15,38 +17,62 @@ public class CollisionProcessor implements Processor {
 
     @Override
     public void process(float delta) {
+        //Keep a list of bullets to remove after iterating
+        List<Bullet> bulletsToRemove = new LinkedList<Bullet>();
+
+        //For each cell in the grid
         for (int x = 0; x < Grid.NUM_CELLS; x++) {
             for (int y = 0; y < Grid.NUM_CELLS; y++) {
-                GameEntity entity = grid.getCells()[x][y];
-                while (entity != null) {
-                    if (entity instanceof Ship) {
-                        GameEntity next = entity.getNext();
-                        while (next != null) {
-                            if (next instanceof Bullet && Intersector.overlapConvexPolygons(entity.getCollisionPolygon(), next.getCollisionPolygon())) {
-                                Ship ship = (Ship) entity;
-                                Bullet bullet = (Bullet) next;
-                                ship.takeDamage(bullet.getDamage());
-                                bullet.destroy();
+                //Skip empty cells
+                if (grid.getCells()[x][y].isEmpty()) continue;
+
+                //For each entity in cell, compare to every entity after it in the list
+                for (int i = 0; i < grid.getCells()[x][y].size(); i++) {
+                    if (i >= grid.getCells()[x][y].size()) return;
+                    GameEntity entity = grid.getCells()[x][y].get(i);
+
+                    for (int j = i + 1; j < grid.getCells()[x][y].size(); j++) {
+                        GameEntity next = grid.getCells()[x][y].get(j);
+
+                        //Skip entities belonging to the same player
+                        if (entity.getPlayerNumber() == next.getPlayerNumber()) continue;
+
+                        //Check if comparing a bullet and a ship, then cast
+                        Bullet bullet = null;
+                        Ship ship = null;
+                        if (entity instanceof Bullet && next instanceof Ship) {
+                            bullet = (Bullet) PaxBritannicaGame.currentMatch.getEntityById(entity.getId());
+                            ship = (Ship) PaxBritannicaGame.currentMatch.getEntityById(next.getId());
+                            //If bullet cannot be found or is dead, it can be removed from the cell
+                            if (bullet == null || bullet.isDead()) {
+                                bulletsToRemove.add((Bullet) entity);
                             }
-                            next = next.getNext();
+                        } else if (entity instanceof Ship && next instanceof Bullet) {
+                            bullet = (Bullet) PaxBritannicaGame.currentMatch.getEntityById(next.getId());
+                            ship = (Ship) PaxBritannicaGame.currentMatch.getEntityById(entity.getId());
+                            if (bullet == null || bullet.isDead()) {
+                                bulletsToRemove.add((Bullet) next);
+                            }
+                        }
+                        if (bullet == null || ship == null) continue;
+
+                        //Check collision between the collision polygons (hitboxes) of each entity
+                        if (Intersector.overlapConvexPolygons(
+                                        bullet.getCollisionPolygon().getTransformedVertices(),
+                                        ship.getCollisionPolygon().getTransformedVertices(), null)
+                        ) {
+                            //Calculate damage and remove bullet
+                            ship.takeDamage(bullet.getDamage());
+                            bulletsToRemove.add(bullet);
                         }
                     }
-                    entity = entity.getNext();
+                }
+                //Remove bullets that have collided with an enemy ship or have otherwise died
+                for (Bullet bullet : bulletsToRemove) {
+                    bullet.destroy();
+                    grid.getCells()[x][y].remove(bullet);
                 }
             }
         }
-
-//        for (int i = 0; i < PaxBritannicaGame.currentMatch.getBullets().size(); i++) {
-//            Bullet bullet = PaxBritannicaGame.currentMatch.getBullets().get(i);
-//            for (Ship ship : PaxBritannicaGame.currentMatch.getAllShips()) {
-//                if (bullet.getPlayerNumber() == ship.getPlayerNumber()) {
-//                    continue; //Skip friendly fire collisions
-//                }
-//                if (Intersector.overlapConvexPolygons(bullet.getCollisionPolygon(), ship.getCollisionPolygon())) {
-//                    ship.takeDamage(bullet.getDamage());
-//                    bullet.destroy();
-//                }
-//            }
-//        }
     }
 }
