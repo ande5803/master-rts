@@ -12,6 +12,8 @@ public class Match {
     private List<Bomber> bombers;
     private List<Frigate> frigates;
     private List<FactoryShip> factories;
+    private List<CombatShip> combatShips;
+    private List<Ship> allShips;
     private List<Bullet> bullets;
     private GameScreen screen;
     private Grid grid;
@@ -22,6 +24,8 @@ public class Match {
         bombers = new LinkedList<Bomber>();
         frigates = new LinkedList<Frigate>();
         factories = new LinkedList<FactoryShip>();
+        combatShips = new LinkedList<CombatShip>();
+        allShips = new LinkedList<Ship>();
         bullets = new LinkedList<Bullet>();
         grid = new Grid();
     }
@@ -53,18 +57,11 @@ public class Match {
     }
 
     public List<Ship> getAllShips() {
-        List<Ship> ships = new LinkedList<Ship>();
-        ships.addAll(getCombatShips());
-        ships.addAll(factories);
-        return ships;
+        return allShips;
     }
 
     public List<CombatShip> getCombatShips() {
-        List<CombatShip> ships = new LinkedList<CombatShip>();
-        ships.addAll(fighters);
-        ships.addAll(bombers);
-        ships.addAll(frigates);
-        return ships;
+        return combatShips;
     }
 
     public void addShip(Ship ship) {
@@ -77,6 +74,8 @@ public class Match {
         } else if (ship instanceof FactoryShip) {
             factories.add((FactoryShip) ship);
         }
+        allShips.add(ship);
+        if (ship instanceof CombatShip) combatShips.add((CombatShip) ship);
     }
 
     public void addBullet(Bullet bullet) {

@@ -11,10 +11,12 @@ public class GameEntity extends Sprite {
     private UUID id = UUID.randomUUID();
     private int playerNumber;
     private boolean alive = true;
+    private Grid grid;
 
     public GameEntity(int playerNumber, TextureRegion region, Grid grid, float x, float y) {
         super(region);
         this.playerNumber = playerNumber;
+        this.grid = grid;
 
         collisionPolygon = new Polygon(new float[] {
                 0, 0,
@@ -45,6 +47,7 @@ public class GameEntity extends Sprite {
 
     public void destroy() {
         alive = false;
+        grid.remove(this);
     }
 
     @Override

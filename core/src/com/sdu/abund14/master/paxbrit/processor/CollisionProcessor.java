@@ -46,12 +46,14 @@ public class CollisionProcessor implements Processor {
                             //If bullet cannot be found or is dead, it can be removed from the cell
                             if (bullet == null || bullet.isDead()) {
                                 bulletsToRemove.add((Bullet) entity);
+                                continue;
                             }
                         } else if (entity instanceof Ship && next instanceof Bullet) {
                             bullet = (Bullet) PaxBritannicaGame.currentMatch.getEntityById(next.getId());
                             ship = (Ship) PaxBritannicaGame.currentMatch.getEntityById(entity.getId());
                             if (bullet == null || bullet.isDead()) {
                                 bulletsToRemove.add((Bullet) next);
+                                continue;
                             }
                         }
                         if (bullet == null || ship == null) continue;
@@ -61,7 +63,6 @@ public class CollisionProcessor implements Processor {
                                         bullet.getCollisionPolygon().getTransformedVertices(),
                                         ship.getCollisionPolygon().getTransformedVertices(), null)
                         ) {
-                            //Calculate damage and remove bullet
                             ship.takeDamage(bullet.getDamage());
                             bulletsToRemove.add(bullet);
                         }

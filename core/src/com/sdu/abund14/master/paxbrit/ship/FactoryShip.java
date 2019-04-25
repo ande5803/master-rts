@@ -117,6 +117,7 @@ public class FactoryShip extends Ship {
 
     @Override
     public void destroy() {
+        super.destroy();
         if (button != null) {
             button.remove();
             button.clear();
