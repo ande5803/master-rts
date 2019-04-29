@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 800;
 		config.height = 600;
-		config.foregroundFPS = 30;
+		config.foregroundFPS = 60;
 		new LwjglApplication(new PaxBritannicaGame(), config);
 	}
 }
