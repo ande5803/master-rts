@@ -25,11 +25,6 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private boolean gameOver = false;
     private boolean victory;
-    private float totalFPS = 0;
-    private int totalFrames = 0;
-    private float averageFPS;
-    private float totalDiff = 0;
-    private float avgDiff;
 
     public Stage getStage() {
         return stage;
@@ -37,7 +32,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        processors = new LinkedList<Processor>();
+        processors = new LinkedList<>();
         batch = new SpriteBatch();
         processors.add(new FactoryShipProcessor());
         processors.add(new CombatShipProcessor());
@@ -49,12 +44,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        totalFPS += 1 / delta;
-        totalFrames++;
-        averageFPS = totalFPS / totalFrames;
-
-        long startTime = System.nanoTime();
-
         stage.act(delta);
         Gdx.gl.glClearColor(BG_COLOR_RED, BG_COLOR_GREEN, BG_COLOR_BLUE, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -74,17 +63,11 @@ public class GameScreen implements Screen {
             font.draw(batch, endGameDisplayText, getStage().getWidth() / 2, getStage().getHeight() / 2);
         }
         batch.end();
-
-        long nanos = System.nanoTime() - startTime;
-        long deltaNanos = (long) (delta * 1000000000);
-        totalDiff += deltaNanos - nanos;
-        System.out.println(totalDiff / totalFrames);
     }
 
     void endGame(boolean victory) {
         gameOver = true;
         this.victory = victory;
-        System.out.println(averageFPS + " FPS");
     }
 
     @Override
