@@ -6,10 +6,11 @@ import com.sdu.abund14.master.paxbrit.ship.Ship;
 import com.sdu.abund14.master.paxbrit.ship.ShipType;
 import com.sdu.abund14.master.paxbrit.util.ShipsUtil;
 
+import java.util.Collection;
 import java.util.List;
 
 public class FighterAI extends CombatShipAI {
-    private List<Ship> ships;
+    private Collection<Ship> ships;
     private float shootingRange = 200;
     private Fighter fighter;
 
@@ -20,7 +21,7 @@ public class FighterAI extends CombatShipAI {
 
     @Override
     public void update(float delta) {
-        ships = PaxBritannicaGame.currentMatch.getAllShips();
+        ships = PaxBritannicaGame.currentMatch.getAllShips().values();
         if (target == null || !ships.contains(target)) {
             target = ShipsUtil.getNearestEnemyShipWithTypePriorities(
                     ship,

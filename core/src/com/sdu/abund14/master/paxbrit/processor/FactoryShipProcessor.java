@@ -8,7 +8,7 @@ import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
-import java.util.ListIterator;
+import java.util.Iterator;
 
 public class FactoryShipProcessor implements Processor {
 
@@ -99,7 +99,7 @@ public class FactoryShipProcessor implements Processor {
 
     @Override
     public void process(float delta) {
-        ListIterator<FactoryShip> iterator = PaxBritannicaGame.currentMatch.getFactories().listIterator();
+        Iterator<FactoryShip> iterator = PaxBritannicaGame.currentMatch.getFactories().values().iterator();
         while (iterator.hasNext()) {
             FactoryShip ship = iterator.next();
             if (ship.isDead()) {

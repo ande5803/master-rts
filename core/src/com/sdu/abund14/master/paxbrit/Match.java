@@ -3,30 +3,28 @@ package com.sdu.abund14.master.paxbrit;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.ship.*;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Match {
-    private List<Fighter> fighters;
-    private List<Bomber> bombers;
-    private List<Frigate> frigates;
-    private List<FactoryShip> factories;
-    private List<CombatShip> combatShips;
-    private List<Ship> allShips;
-    private List<Bullet> bullets;
+    private Map<UUID, Fighter> fighters;
+    private Map<UUID, Bomber> bombers;
+    private Map<UUID, Frigate> frigates;
+    private Map<UUID, FactoryShip> factories;
+    private Map<UUID, CombatShip> combatShips;
+    private Map<UUID, Ship> allShips;
+    private Map<UUID, Bullet> bullets;
     private GameScreen screen;
     private Grid grid;
 
     Match(GameScreen screen) {
         this.screen = screen;
-        fighters = new LinkedList<Fighter>();
-        bombers = new LinkedList<Bomber>();
-        frigates = new LinkedList<Frigate>();
-        factories = new LinkedList<FactoryShip>();
-        combatShips = new LinkedList<CombatShip>();
-        allShips = new LinkedList<Ship>();
-        bullets = new LinkedList<Bullet>();
+        fighters = new HashMap<UUID, Fighter>();
+        bombers = new HashMap<UUID, Bomber>();
+        frigates = new HashMap<UUID, Frigate>();
+        factories = new HashMap<UUID, FactoryShip>();
+        combatShips = new HashMap<UUID, CombatShip>();
+        allShips = new HashMap<UUID, Ship>();
+        bullets = new HashMap<UUID, Bullet>();
         grid = new Grid();
     }
 
@@ -34,58 +32,58 @@ public class Match {
         return screen;
     }
 
-    public List<Fighter> getFighters() {
+    public Map<UUID, Fighter> getFighters() {
         return fighters;
     }
 
-    public List<Bomber> getBombers() {
+    public Map<UUID, Bomber> getBombers() {
         return bombers;
     }
 
-    public List<Frigate> getFrigates() {
+    public Map<UUID, Frigate> getFrigates() {
         return frigates;
     }
 
-    public List<FactoryShip> getFactories() {
+    public Map<UUID, FactoryShip> getFactories() {
         return factories;
     }
 
-    public List<Bullet> getBullets() { return bullets; }
+    public Map<UUID, Bullet> getBullets() { return bullets; }
 
     public Grid getGrid() {
         return grid;
     }
 
-    public List<Ship> getAllShips() {
+    public Map<UUID, Ship> getAllShips() {
         return allShips;
     }
 
-    public List<CombatShip> getCombatShips() {
+    public Map<UUID, CombatShip> getCombatShips() {
         return combatShips;
     }
 
     public void addShip(Ship ship) {
         if (ship instanceof Fighter) {
-            fighters.add((Fighter) ship);
+            fighters.put(ship.getId(), (Fighter) ship);
         } else if (ship instanceof Bomber) {
-            bombers.add((Bomber) ship);
+            bombers.put(ship.getId(), (Bomber) ship);
         } else if (ship instanceof Frigate) {
-            frigates.add((Frigate) ship);
+            frigates.put(ship.getId(), (Frigate) ship);
         } else if (ship instanceof FactoryShip) {
-            factories.add((FactoryShip) ship);
+            factories.put(ship.getId(), (FactoryShip) ship);
         }
-        allShips.add(ship);
-        if (ship instanceof CombatShip) combatShips.add((CombatShip) ship);
+        allShips.put(ship.getId(), ship);
+        if (ship instanceof CombatShip) combatShips.put(ship.getId(), (CombatShip) ship);
     }
 
     public void addBullet(Bullet bullet) {
-        bullets.add(bullet);
+        bullets.put(bullet.getId(), bullet);
     }
 
     public void checkGameEndConditions() {
         int playerShips = 0;
         int opponentShips = 0;
-        for (FactoryShip ship : factories) {
+        for (FactoryShip ship : factories.values()) {
             if (ship.isDead()) continue;
             if (ship.isPlayerControlled()) {
                 playerShips++;
@@ -106,12 +104,8 @@ public class Match {
     }
 
     public GameEntity getEntityById(UUID id) {
-        for (Ship ship : getAllShips()) {
-            if (ship.getId().equals(id)) return ship;
-        }
-        for (Bullet bullet : getBullets()) {
-            if (bullet.getId().equals(id)) return bullet;
-        }
+        if (allShips.get(id) != null) return allShips.get(id);
+        if (bullets.get(id) != null) return bullets.get(id);
         return null;
     }
 }

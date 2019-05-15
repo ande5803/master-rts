@@ -5,6 +5,7 @@ import com.sdu.abund14.master.paxbrit.ship.Ship;
 import com.sdu.abund14.master.paxbrit.ship.ShipType;
 
 import java.awt.geom.Point2D;
+import java.util.Collection;
 import java.util.List;
 
 public class ShipsUtil {
@@ -21,7 +22,7 @@ public class ShipsUtil {
     }
 
     private static Ship getNearestEnemyShipOfType(Ship source, ShipType type) {
-        List<? extends Ship> possibleTargets = getShipsOfType(type);
+        Collection<? extends Ship> possibleTargets = getShipsOfType(type);
         if (possibleTargets == null || possibleTargets.size() == 0) {
             return null;
         }
@@ -41,16 +42,16 @@ public class ShipsUtil {
         return closestShip;
     }
 
-    private static List<? extends Ship> getShipsOfType(ShipType type) {
+    private static Collection<? extends Ship> getShipsOfType(ShipType type) {
         switch (type) {
             case FIGHTER:
-                return PaxBritannicaGame.currentMatch.getFighters();
+                return PaxBritannicaGame.currentMatch.getFighters().values();
             case BOMBER:
-                return PaxBritannicaGame.currentMatch.getBombers();
+                return PaxBritannicaGame.currentMatch.getBombers().values();
             case FRIGATE:
-                return PaxBritannicaGame.currentMatch.getFrigates();
+                return PaxBritannicaGame.currentMatch.getFrigates().values();
             case FACTORY:
-                return PaxBritannicaGame.currentMatch.getFactories();
+                return PaxBritannicaGame.currentMatch.getFactories().values();
             default:
                 System.out.println("Error: Unknown ShipType");
                 return null;

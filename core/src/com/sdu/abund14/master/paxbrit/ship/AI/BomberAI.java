@@ -6,6 +6,7 @@ import com.sdu.abund14.master.paxbrit.ship.Ship;
 import com.sdu.abund14.master.paxbrit.ship.ShipType;
 import com.sdu.abund14.master.paxbrit.util.ShipsUtil;
 
+import java.util.Collection;
 import java.util.List;
 
 public class BomberAI extends CombatShipAI {
@@ -20,7 +21,7 @@ public class BomberAI extends CombatShipAI {
 
     @Override
     public void update(float delta) {
-        List<Ship> ships = PaxBritannicaGame.currentMatch.getAllShips();
+        Collection<Ship> ships = PaxBritannicaGame.currentMatch.getAllShips().values();
         if (target == null || !ships.contains(target)) {
             target = ShipsUtil.getNearestEnemyShipWithTypePriorities(
                     ship,

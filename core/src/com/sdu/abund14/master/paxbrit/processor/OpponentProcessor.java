@@ -17,7 +17,7 @@ public class OpponentProcessor implements Processor {
     private void init() {
         //Instantiate opponents and make first choice
         opponents = new LinkedList<Opponent>();
-        for (FactoryShip ship : PaxBritannicaGame.currentMatch.getFactories()) {
+        for (FactoryShip ship : PaxBritannicaGame.currentMatch.getFactories().values()) {
             if (ship.isPlayerControlled()) continue;
             opponents.add(new Opponent(ship));
         }

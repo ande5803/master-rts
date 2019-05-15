@@ -53,10 +53,10 @@ public class GameScreen implements Screen {
         }
         stage.draw();
         batch.begin();
-        for (Ship ship : PaxBritannicaGame.currentMatch.getAllShips()) {
+        for (Ship ship : PaxBritannicaGame.currentMatch.getAllShips().values()) {
             ship.draw(batch, 1);
         }
-        for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets()) {
+        for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets().values()) {
             bullet.draw(batch);
         }
         if (gameOver) {

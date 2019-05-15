@@ -4,13 +4,13 @@ import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.*;
 
-import java.util.ListIterator;
+import java.util.Iterator;
 
 public class CombatShipProcessor implements Processor {
     @Override
     public void process(float delta) {
         removeDeadShips();
-        for (CombatShip ship : PaxBritannicaGame.currentMatch.getCombatShips()) {
+        for (CombatShip ship : PaxBritannicaGame.currentMatch.getCombatShips().values()) {
             ship.ai.update(delta);
             if (ship.shotCooldownTimeLeft > 0) {
                 ship.shotCooldownTimeLeft -= delta;
@@ -26,23 +26,23 @@ public class CombatShipProcessor implements Processor {
     }
 
     private void removeDeadShips() {
-        ListIterator<Fighter> fighterListIterator = PaxBritannicaGame.currentMatch.getFighters().listIterator();
+        Iterator<Fighter> fighterListIterator = PaxBritannicaGame.currentMatch.getFighters().values().iterator();
         while (fighterListIterator.hasNext()) {
             if (fighterListIterator.next().isDead()) fighterListIterator.remove();
         }
-        ListIterator<Bomber> bomberListIterator = PaxBritannicaGame.currentMatch.getBombers().listIterator();
+         Iterator<Bomber> bomberListIterator = PaxBritannicaGame.currentMatch.getBombers().values().iterator();
         while (bomberListIterator.hasNext()) {
             if (bomberListIterator.next().isDead()) bomberListIterator.remove();
         }
-        ListIterator<Frigate> frigateListIterator = PaxBritannicaGame.currentMatch.getFrigates().listIterator();
+        Iterator<Frigate> frigateListIterator = PaxBritannicaGame.currentMatch.getFrigates().values().iterator();
         while (frigateListIterator.hasNext()) {
             if (frigateListIterator.next().isDead()) frigateListIterator.remove();
         }
-        ListIterator<CombatShip> combatShipListIterator = PaxBritannicaGame.currentMatch.getCombatShips().listIterator();
+        Iterator<CombatShip> combatShipListIterator = PaxBritannicaGame.currentMatch.getCombatShips().values().iterator();
         while (combatShipListIterator.hasNext()) {
             if (combatShipListIterator.next().isDead()) combatShipListIterator.remove();
         }
-        ListIterator<Ship> shipListIterator = PaxBritannicaGame.currentMatch.getAllShips().listIterator();
+        Iterator<Ship> shipListIterator = PaxBritannicaGame.currentMatch.getAllShips().values().iterator();
         while (shipListIterator.hasNext()) {
             if (shipListIterator.next().isDead()) shipListIterator.remove();
         }
