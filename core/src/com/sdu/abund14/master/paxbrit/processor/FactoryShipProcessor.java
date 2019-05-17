@@ -6,7 +6,6 @@ import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
-import java.util.ListIterator;
 
 public class FactoryShipProcessor implements Processor {
 
