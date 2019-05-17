@@ -28,6 +28,11 @@ public class Grid {
         return cells;
     }
 
+
+    //FIXME: Possible reason for bug where some ships are not hit by bullets!
+    //Entities occupying more than one cell are added to more than one linked list,
+    //could be that they are not recognized by the same ID and therefore do not
+    //exist in the list data structures! (Pointer stuff)
     public void add(GameEntity entity) {
         for (int x = 0; x < NUM_CELLS; x++) {
             for (int y = 0; y < NUM_CELLS; y++) {
