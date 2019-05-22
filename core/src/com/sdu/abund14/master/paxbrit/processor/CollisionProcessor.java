@@ -8,7 +8,6 @@ import com.sdu.abund14.master.paxbrit.ship.Ship;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveAction;
 
@@ -43,7 +42,7 @@ public class CollisionProcessor implements Processor {
             List<CheckCollisionAction> subTasks = new ArrayList<>();
             ConcurrentLinkedQueue<Ship> subQueueOne = ships;
             ConcurrentLinkedQueue<Ship> subQueueTwo = new ConcurrentLinkedQueue<>();
-            for (int i = 0; i < shipThreshold / 2; i++) {
+            for (int i = 0; i < ships.size() / 2; i++) {
                 subQueueTwo.add(subQueueOne.remove());
             }
             subTasks.add(new CheckCollisionAction(subQueueOne));

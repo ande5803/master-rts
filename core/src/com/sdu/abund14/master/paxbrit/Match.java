@@ -2,9 +2,6 @@ package com.sdu.abund14.master.paxbrit;
 
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.ship.*;
-
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Match {

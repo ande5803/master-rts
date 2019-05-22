@@ -5,8 +5,6 @@ import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 
-import java.util.ListIterator;
-
 public class BulletProcessor implements Processor {
 
     public void process(float delta) {

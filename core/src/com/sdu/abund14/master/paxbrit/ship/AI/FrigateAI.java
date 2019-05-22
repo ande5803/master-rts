@@ -5,8 +5,6 @@ import com.sdu.abund14.master.paxbrit.ship.Frigate;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
 import com.sdu.abund14.master.paxbrit.ship.ShipType;
 import com.sdu.abund14.master.paxbrit.util.ShipsUtil;
-
-import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class FrigateAI extends CombatShipAI {

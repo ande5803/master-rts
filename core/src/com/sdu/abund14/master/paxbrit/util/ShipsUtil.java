@@ -5,7 +5,6 @@ import com.sdu.abund14.master.paxbrit.ship.Ship;
 import com.sdu.abund14.master.paxbrit.ship.ShipType;
 
 import java.awt.geom.Point2D;
-import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ShipsUtil {

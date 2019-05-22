@@ -6,7 +6,6 @@ import com.sdu.abund14.master.paxbrit.ship.*;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveAction;
@@ -50,7 +49,7 @@ public class CombatShipProcessor implements Processor {
             List<ProcessCombatShipAction> subTasks = new LinkedList<>();
             ConcurrentLinkedQueue<CombatShip> subQueueOne = ships;
             ConcurrentLinkedQueue<CombatShip> subQueueTwo = new ConcurrentLinkedQueue<>();
-            for (int i = 0; i < shipThreshold / 2; i++) {
+            for (int i = 0; i < ships.size() / 2; i++) {
                 subQueueTwo.add(subQueueOne.remove());
             }
             subTasks.add(new ProcessCombatShipAction(subQueueOne, delta));
