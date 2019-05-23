@@ -7,7 +7,7 @@ import java.util.concurrent.ForkJoinPool;
 public class PaxBritannicaGame extends Game {
 
 	public static Match currentMatch;
-	public static ForkJoinPool forkJoinPool = new ForkJoinPool(4);
+	public static ForkJoinPool forkJoinPool = new ForkJoinPool(2);
 
 	@Override
 	public void create () {
