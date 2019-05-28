@@ -2,7 +2,7 @@ package com.sdu.abund14.master.paxbrit.processor;
 
 import com.badlogic.gdx.Gdx;
 import com.sdu.abund14.master.paxbrit.GameSettings;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
@@ -83,7 +83,7 @@ public class FactoryShipProcessor implements Processor {
 
     @Override
     public void process(float delta) {
-        ListIterator<FactoryShip> iterator = PaxBritannicaGame.currentMatch.getFactories().listIterator();
+        ListIterator<FactoryShip> iterator = NautilusGame.currentMatch.getFactories().listIterator();
         while (iterator.hasNext()) {
             FactoryShip ship = iterator.next();
             if (ship.isDead()) {
