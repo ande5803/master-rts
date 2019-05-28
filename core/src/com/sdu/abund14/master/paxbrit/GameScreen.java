@@ -69,10 +69,10 @@ public class GameScreen implements Screen {
         ecs.submit(new Runnable() {
             @Override
             public void run() {
-                for (Ship ship : PaxBritannicaGame.currentMatch.getAllShips()) {
+                for (Ship ship : NautilusGame.currentMatch.getAllShips()) {
                     ship.draw(batch, 1);
                 }
-                for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets()) {
+                for (Bullet bullet : NautilusGame.currentMatch.getBullets()) {
                     bullet.draw(batch);
                 }
             }

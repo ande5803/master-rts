@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 import com.sdu.abund14.master.paxbrit.util.MathUtil;
 
@@ -118,7 +118,7 @@ public class FactoryShip extends Ship {
             button.remove();
             button.clear();
         }
-        PaxBritannicaGame.currentMatch.checkGameEndConditions();
+        NautilusGame.currentMatch.checkGameEndConditions();
     }
 
     class ProductionButton extends Image {
@@ -144,7 +144,7 @@ public class FactoryShip extends Ship {
                 }
             });
             setTouchable(Touchable.enabled);
-            PaxBritannicaGame.currentMatch.getScreen().getStage().addActor(this);
+            NautilusGame.currentMatch.getScreen().getStage().addActor(this);
         }
 
         @Override
