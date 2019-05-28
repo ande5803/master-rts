@@ -1,7 +1,7 @@
 package com.sdu.abund14.master.paxbrit.bullet;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 
 public class Bullet extends Sprite {
@@ -51,6 +51,6 @@ public class Bullet extends Sprite {
         setRotation(angle);
         setRegion(TextureRegionProvider.getInstance().get(texture));
         setSize(getRegionWidth(), getRegionHeight());
-        PaxBritannicaGame.currentMatch.addBullet(this);
+        NautilusGame.currentMatch.addBullet(this);
     }
 }

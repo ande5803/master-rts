@@ -1,8 +1,7 @@
 package com.sdu.abund14.master.paxbrit.ship;
 
 import com.badlogic.gdx.math.Vector2;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
-import com.sdu.abund14.master.paxbrit.bullet.Bullet;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.badlogic.gdx.Gdx;
 import com.sdu.abund14.master.paxbrit.ship.AI.CombatShipAI;
 import com.sdu.abund14.master.paxbrit.util.MathUtil;
@@ -103,7 +102,7 @@ public class CombatShip extends Ship {
 
     private void shoot() {
         Vector2 bulletPosition = MathUtil.offsetVector(getX(), getY(), getRotation(), BULLET_OFFSET_DISTANCE);
-        PaxBritannicaGame.currentMatch.getBulletPool().borrowBullet(
+        NautilusGame.currentMatch.getBulletPool().borrowBullet(
                 getPlayerNumber(),
                 shotDamage,
                 bulletSpeed,
