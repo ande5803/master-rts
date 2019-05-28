@@ -3,7 +3,7 @@ package com.sdu.abund14.master.paxbrit.processor;
 import com.badlogic.gdx.math.Intersector;
 import com.sdu.abund14.master.paxbrit.GameEntity;
 import com.sdu.abund14.master.paxbrit.Grid;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CollisionProcessor implements Processor {
 
-    private Grid grid = PaxBritannicaGame.currentMatch.getGrid();
+    private Grid grid = NautilusGame.currentMatch.getGrid();
 
     @Override
     public void process(float delta) {
@@ -41,16 +41,16 @@ public class CollisionProcessor implements Processor {
                         Bullet bullet = null;
                         Ship ship = null;
                         if (entity instanceof Bullet && next instanceof Ship) {
-                            bullet = (Bullet) PaxBritannicaGame.currentMatch.getEntityById(entity.getId());
-                            ship = (Ship) PaxBritannicaGame.currentMatch.getEntityById(next.getId());
+                            bullet = (Bullet) NautilusGame.currentMatch.getEntityById(entity.getId());
+                            ship = (Ship) NautilusGame.currentMatch.getEntityById(next.getId());
                             //If bullet cannot be found or is dead, it can be removed from the cell
                             if (bullet == null || bullet.isDead()) {
                                 bulletsToRemove.add((Bullet) entity);
                                 continue;
                             }
                         } else if (entity instanceof Ship && next instanceof Bullet) {
-                            bullet = (Bullet) PaxBritannicaGame.currentMatch.getEntityById(next.getId());
-                            ship = (Ship) PaxBritannicaGame.currentMatch.getEntityById(entity.getId());
+                            bullet = (Bullet) NautilusGame.currentMatch.getEntityById(next.getId());
+                            ship = (Ship) NautilusGame.currentMatch.getEntityById(entity.getId());
                             if (bullet == null || bullet.isDead()) {
                                 bulletsToRemove.add((Bullet) next);
                                 continue;

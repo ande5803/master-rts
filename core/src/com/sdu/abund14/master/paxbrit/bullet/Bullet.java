@@ -2,7 +2,7 @@ package com.sdu.abund14.master.paxbrit.bullet;
 
 import com.sdu.abund14.master.paxbrit.GameEntity;
 import com.sdu.abund14.master.paxbrit.Grid;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 
 public class Bullet extends GameEntity {
@@ -16,7 +16,7 @@ public class Bullet extends GameEntity {
         this.speed = speed;
         setPosition(startX, startY);
         setRotation(angle);
-        PaxBritannicaGame.currentMatch.addBullet(this);
+        NautilusGame.currentMatch.addBullet(this);
     }
 
     public int getDamage() {

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.sdu.abund14.master.paxbrit.GameSettings;
 import com.sdu.abund14.master.paxbrit.Grid;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
@@ -30,7 +30,7 @@ public class FactoryShipProcessor implements Processor {
     }
 
     private void init() {
-        grid = PaxBritannicaGame.currentMatch.getGrid();
+        grid = NautilusGame.currentMatch.getGrid();
         createShips(GameSettings.numPlayers);
     }
 
@@ -99,7 +99,7 @@ public class FactoryShipProcessor implements Processor {
 
     @Override
     public void process(float delta) {
-        Iterator<FactoryShip> iterator = PaxBritannicaGame.currentMatch.getFactories().values().iterator();
+        Iterator<FactoryShip> iterator = NautilusGame.currentMatch.getFactories().values().iterator();
         while (iterator.hasNext()) {
             FactoryShip ship = iterator.next();
             if (ship.isDead()) {

@@ -1,12 +1,11 @@
 package com.sdu.abund14.master.paxbrit.util;
 
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
 import com.sdu.abund14.master.paxbrit.ship.ShipType;
 
 import java.awt.geom.Point2D;
 import java.util.Collection;
-import java.util.List;
 
 public class ShipsUtil {
 
@@ -45,13 +44,13 @@ public class ShipsUtil {
     private static Collection<? extends Ship> getShipsOfType(ShipType type) {
         switch (type) {
             case FIGHTER:
-                return PaxBritannicaGame.currentMatch.getFighters().values();
+                return NautilusGame.currentMatch.getFighters().values();
             case BOMBER:
-                return PaxBritannicaGame.currentMatch.getBombers().values();
+                return NautilusGame.currentMatch.getBombers().values();
             case FRIGATE:
-                return PaxBritannicaGame.currentMatch.getFrigates().values();
+                return NautilusGame.currentMatch.getFrigates().values();
             case FACTORY:
-                return PaxBritannicaGame.currentMatch.getFactories().values();
+                return NautilusGame.currentMatch.getFactories().values();
             default:
                 System.out.println("Error: Unknown ShipType");
                 return null;

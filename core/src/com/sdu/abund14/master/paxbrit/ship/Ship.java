@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.sdu.abund14.master.paxbrit.GameEntity;
 import com.sdu.abund14.master.paxbrit.Grid;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 
 public class Ship extends GameEntity {
@@ -16,7 +16,7 @@ public class Ship extends GameEntity {
 
     Ship(int playerNumber, String textureName, Grid grid, float x, float y) {
         super(playerNumber, TextureRegionProvider.getInstance().get(textureName), grid, x, y);
-        PaxBritannicaGame.currentMatch.addShip(this);
+        NautilusGame.currentMatch.addShip(this);
     }
 
     public Vector2 getPosition() {

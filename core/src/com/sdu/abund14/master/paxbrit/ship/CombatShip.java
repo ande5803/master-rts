@@ -2,7 +2,7 @@ package com.sdu.abund14.master.paxbrit.ship;
 
 import com.badlogic.gdx.math.Vector2;
 import com.sdu.abund14.master.paxbrit.Grid;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.badlogic.gdx.Gdx;
 import com.sdu.abund14.master.paxbrit.ship.AI.CombatShipAI;
@@ -108,7 +108,7 @@ public class CombatShip extends Ship {
                 getPlayerNumber(),
                 shotDamage,
                 bulletSpeed,
-                PaxBritannicaGame.currentMatch.getGrid(),
+                NautilusGame.currentMatch.getGrid(),
                 bulletPosition.x,
                 bulletPosition.y,
                 getRotation(),

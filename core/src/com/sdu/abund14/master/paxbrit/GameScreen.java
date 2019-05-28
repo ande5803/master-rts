@@ -44,7 +44,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
         stage.act(delta);
         Gdx.gl.glClearColor(BG_COLOR_RED, BG_COLOR_GREEN, BG_COLOR_BLUE, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -53,10 +52,10 @@ public class GameScreen implements Screen {
         }
         stage.draw();
         batch.begin();
-        for (Ship ship : PaxBritannicaGame.currentMatch.getAllShips().values()) {
+        for (Ship ship : NautilusGame.currentMatch.getAllShips().values()) {
             ship.draw(batch, 1);
         }
-        for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets().values()) {
+        for (Bullet bullet : NautilusGame.currentMatch.getBullets().values()) {
             bullet.draw(batch);
         }
         if (gameOver) {

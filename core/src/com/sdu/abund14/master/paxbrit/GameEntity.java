@@ -52,7 +52,7 @@ public class GameEntity extends Sprite {
 
     @Override
     public void setPosition(float x, float y) {
-        PaxBritannicaGame.currentMatch.getGrid().move(this, x, y);
+        NautilusGame.currentMatch.getGrid().move(this, x, y);
         super.setPosition(x, y);
         collisionPolygon.setPosition(x, y);
     }
