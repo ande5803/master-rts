@@ -1,6 +1,6 @@
 package com.sdu.abund14.master.paxbrit.processor;
 
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.*;
 
@@ -14,15 +14,15 @@ public class CombatShipProcessor implements Processor {
     @Override
     public void process(float delta) {
         removeDeadShips();
-        PaxBritannicaGame.forkJoinPool.submit(
-                new ProcessCombatShipAction(PaxBritannicaGame.currentMatch.getCombatShips(), delta)
+        NautilusGame.forkJoinPool.submit(
+                new ProcessCombatShipAction(NautilusGame.currentMatch.getCombatShips(), delta)
         );
     }
 
     private void removeDeadShips() {
-        PaxBritannicaGame.currentMatch.getFighters().removeIf(Ship::isDead);
-        PaxBritannicaGame.currentMatch.getBombers().removeIf(Ship::isDead);
-        PaxBritannicaGame.currentMatch.getFrigates().removeIf(Ship::isDead);
+        NautilusGame.currentMatch.getFighters().removeIf(Ship::isDead);
+        NautilusGame.currentMatch.getBombers().removeIf(Ship::isDead);
+        NautilusGame.currentMatch.getFrigates().removeIf(Ship::isDead);
     }
 
     class ProcessCombatShipAction extends RecursiveAction {

@@ -1,6 +1,6 @@
 package com.sdu.abund14.master.paxbrit.ship.AI;
 
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.ship.Frigate;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
 import com.sdu.abund14.master.paxbrit.ship.ShipType;
@@ -19,7 +19,7 @@ public class FrigateAI extends CombatShipAI {
 
     @Override
     public void update(float delta) {
-        ConcurrentLinkedQueue<Ship> ships = PaxBritannicaGame.currentMatch.getAllShips();
+        ConcurrentLinkedQueue<Ship> ships = NautilusGame.currentMatch.getAllShips();
         if (target == null || !ships.contains(target)) {
             target = ShipsUtil.getNearestEnemyShipWithTypePriorities(
                     ship,

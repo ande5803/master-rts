@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 
 import java.util.concurrent.ForkJoinPool;
 
-public class PaxBritannicaGame extends Game {
+public class NautilusGame extends Game {
 
 	public static Match currentMatch;
 	public static ForkJoinPool forkJoinPool = new ForkJoinPool(2);

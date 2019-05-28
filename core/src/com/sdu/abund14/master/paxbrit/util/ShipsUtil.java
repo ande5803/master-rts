@@ -1,6 +1,6 @@
 package com.sdu.abund14.master.paxbrit.util;
 
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
 import com.sdu.abund14.master.paxbrit.ship.ShipType;
 
@@ -44,13 +44,13 @@ public class ShipsUtil {
     private static ConcurrentLinkedQueue<? extends Ship> getShipsOfType(ShipType type) {
         switch (type) {
             case FIGHTER:
-                return PaxBritannicaGame.currentMatch.getFighters();
+                return NautilusGame.currentMatch.getFighters();
             case BOMBER:
-                return PaxBritannicaGame.currentMatch.getBombers();
+                return NautilusGame.currentMatch.getBombers();
             case FRIGATE:
-                return PaxBritannicaGame.currentMatch.getFrigates();
+                return NautilusGame.currentMatch.getFrigates();
             case FACTORY:
-                return PaxBritannicaGame.currentMatch.getFactories();
+                return NautilusGame.currentMatch.getFactories();
             default:
                 System.out.println("Error: Unknown ShipType");
                 return null;

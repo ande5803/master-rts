@@ -1,7 +1,7 @@
 package com.sdu.abund14.master.paxbrit.processor;
 
 import com.sdu.abund14.master.paxbrit.Match;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
@@ -13,11 +13,11 @@ import java.util.concurrent.RecursiveAction;
 
 public class CollisionProcessor implements Processor {
 
-    private Match match = PaxBritannicaGame.currentMatch;
+    private Match match = NautilusGame.currentMatch;
 
     @Override
     public void process(float delta) {
-        PaxBritannicaGame.forkJoinPool.submit(new CheckCollisionAction(match.getAllShips()));
+        NautilusGame.forkJoinPool.submit(new CheckCollisionAction(match.getAllShips()));
     }
 
     class CheckCollisionAction extends RecursiveAction {

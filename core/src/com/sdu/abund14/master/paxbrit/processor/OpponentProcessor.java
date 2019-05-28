@@ -1,6 +1,6 @@
 package com.sdu.abund14.master.paxbrit.processor;
 
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.opponent.Opponent;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
@@ -17,7 +17,7 @@ public class OpponentProcessor implements Processor {
     private void init() {
         //Instantiate opponents and make first choice
         opponents = new LinkedList<>();
-        for (FactoryShip ship : PaxBritannicaGame.currentMatch.getFactories()) {
+        for (FactoryShip ship : NautilusGame.currentMatch.getFactories()) {
             if (ship.isPlayerControlled()) continue;
             opponents.add(new Opponent(ship));
         }

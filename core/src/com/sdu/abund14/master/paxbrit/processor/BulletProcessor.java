@@ -1,16 +1,16 @@
 package com.sdu.abund14.master.paxbrit.processor;
 
 import com.badlogic.gdx.Gdx;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 
 public class BulletProcessor implements Processor {
 
     public void process(float delta) {
-        for (Bullet bullet : PaxBritannicaGame.currentMatch.getBullets()) {
+        for (Bullet bullet : NautilusGame.currentMatch.getBullets()) {
             if (!bullet.isAlive()) {
-                PaxBritannicaGame.currentMatch.getBullets().remove(bullet);
+                NautilusGame.currentMatch.getBullets().remove(bullet);
                 continue;
             }
             //Propagate forward
