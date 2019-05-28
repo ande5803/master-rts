@@ -3,7 +3,7 @@ package com.sdu.abund14.master.paxbrit.ship;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.graphics.TextureRegionProvider;
 
 public class Ship extends Sprite {
@@ -17,7 +17,7 @@ public class Ship extends Sprite {
     Ship(int playerNumber, String textureName ) {
         super(TextureRegionProvider.getInstance().get(textureName));
         this.playerNumber = playerNumber;
-        PaxBritannicaGame.currentMatch.addShip(this);
+        NautilusGame.currentMatch.addShip(this);
     }
 
     public int getPlayerNumber() {

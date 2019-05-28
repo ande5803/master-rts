@@ -1,26 +1,25 @@
 package com.sdu.abund14.master.paxbrit.processor;
 
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.bullet.Bullet;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 public class CollisionProcessor implements Processor {
 
     @Override
     public void process(float delta) {
-        List<Ship> ships = PaxBritannicaGame.currentMatch.getShips();
-        List<Bullet> bullets = PaxBritannicaGame.currentMatch.getBullets();
-        int p1Ships = PaxBritannicaGame.currentMatch.getNumPlayer1Ships();
-        int p2Ships = PaxBritannicaGame.currentMatch.getNumPlayer2Ships();
-        int p3Ships = PaxBritannicaGame.currentMatch.getNumPlayer3Ships();
-        int p1Bullets = PaxBritannicaGame.currentMatch.getNumPlayer1Bullets();
-        int p2Bullets = PaxBritannicaGame.currentMatch.getNumPlayer2Bullets();
-        int p3Bullets = PaxBritannicaGame.currentMatch.getNumPlayer3Bullets();
+        List<Ship> ships = NautilusGame.currentMatch.getShips();
+        List<Bullet> bullets = NautilusGame.currentMatch.getBullets();
+        int p1Ships = NautilusGame.currentMatch.getNumPlayer1Ships();
+        int p2Ships = NautilusGame.currentMatch.getNumPlayer2Ships();
+        int p3Ships = NautilusGame.currentMatch.getNumPlayer3Ships();
+        int p1Bullets = NautilusGame.currentMatch.getNumPlayer1Bullets();
+        int p2Bullets = NautilusGame.currentMatch.getNumPlayer2Bullets();
+        int p3Bullets = NautilusGame.currentMatch.getNumPlayer3Bullets();
 
         for (int i = 0; i < ships.size(); i++) {
             Ship ship = ships.get(i);
@@ -46,7 +45,7 @@ public class CollisionProcessor implements Processor {
                 }
             }
             for (Bullet bullet : bulletsToRemove) {
-                PaxBritannicaGame.currentMatch.removeBullet(bullet);
+                NautilusGame.currentMatch.removeBullet(bullet);
             }
         }
     }

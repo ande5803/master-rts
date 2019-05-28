@@ -2,13 +2,12 @@ package com.sdu.abund14.master.paxbrit.processor;
 
 import com.badlogic.gdx.Gdx;
 import com.sdu.abund14.master.paxbrit.GameSettings;
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.FactoryShip;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 public class FactoryShipProcessor implements Processor {
 
@@ -86,7 +85,7 @@ public class FactoryShipProcessor implements Processor {
     @Override
     public void process(float delta) {
         List<FactoryShip> shipsToRemove = new LinkedList<FactoryShip>();
-        for (FactoryShip ship : PaxBritannicaGame.currentMatch.getFactories()) {
+        for (FactoryShip ship : NautilusGame.currentMatch.getFactories()) {
             if (ship.isDead()) {
                 shipsToRemove.add(ship);
                 continue;
@@ -102,7 +101,7 @@ public class FactoryShipProcessor implements Processor {
             );
         }
         for (FactoryShip ship : shipsToRemove) {
-            PaxBritannicaGame.currentMatch.removeShip(ship);
+            NautilusGame.currentMatch.removeShip(ship);
         }
     }
 

@@ -2,7 +2,7 @@ package com.sdu.abund14.master.paxbrit;
 
 import com.badlogic.gdx.Game;
 
-public class PaxBritannicaGame extends Game {
+public class NautilusGame extends Game {
 
 	public static Match currentMatch;
 

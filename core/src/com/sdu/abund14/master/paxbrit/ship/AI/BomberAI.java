@@ -1,6 +1,6 @@
 package com.sdu.abund14.master.paxbrit.ship.AI;
 
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.ship.Bomber;
 import com.sdu.abund14.master.paxbrit.ship.Ship;
 import com.sdu.abund14.master.paxbrit.ship.ShipType;
@@ -20,7 +20,7 @@ public class BomberAI extends CombatShipAI {
 
     @Override
     public void update(float delta) {
-        List<Ship> ships = PaxBritannicaGame.currentMatch.getShips();
+        List<Ship> ships = NautilusGame.currentMatch.getShips();
         if (target == null || !ships.contains(target)) {
             target = ShipsUtil.getNearestEnemyShipWithTypePriorities(
                     ship,

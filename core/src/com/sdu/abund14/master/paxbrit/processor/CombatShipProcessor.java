@@ -1,6 +1,6 @@
 package com.sdu.abund14.master.paxbrit.processor;
 
-import com.sdu.abund14.master.paxbrit.PaxBritannicaGame;
+import com.sdu.abund14.master.paxbrit.NautilusGame;
 import com.sdu.abund14.master.paxbrit.interfaces.Processor;
 import com.sdu.abund14.master.paxbrit.ship.CombatShip;
 
@@ -8,7 +8,7 @@ public class CombatShipProcessor implements Processor {
     @Override
     public void process(float delta) {
         removeDeadShips();
-        for (CombatShip ship : PaxBritannicaGame.currentMatch.getCombatShips()) {
+        for (CombatShip ship : NautilusGame.currentMatch.getCombatShips()) {
             ship.ai.update(delta);
             if (ship.shotCooldownTimeLeft > 0) {
                 ship.shotCooldownTimeLeft -= delta;
@@ -24,9 +24,9 @@ public class CombatShipProcessor implements Processor {
     }
 
     private void removeDeadShips() {
-        for (CombatShip ship : PaxBritannicaGame.currentMatch.getCombatShips()) {
+        for (CombatShip ship : NautilusGame.currentMatch.getCombatShips()) {
             if (ship.isDead()) {
-                PaxBritannicaGame.currentMatch.removeShip(ship);
+                NautilusGame.currentMatch.removeShip(ship);
             }
         }
     }
