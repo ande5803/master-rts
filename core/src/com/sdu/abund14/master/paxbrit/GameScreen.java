@@ -45,8 +45,16 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
+    float totalFPS = 0;
+    int totalFrames = 0;
+    float avgFPS = 0;
+
     @Override
     public void render(final float delta) {
+        totalFPS += 1/delta;
+        totalFrames++;
+        avgFPS = totalFPS / totalFrames;
+
         stage.act(delta);
         Gdx.gl.glClearColor(BG_COLOR_RED, BG_COLOR_GREEN, BG_COLOR_BLUE, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -98,6 +106,7 @@ public class GameScreen implements Screen {
     void endGame(boolean victory) {
         gameOver = true;
         this.victory = victory;
+        System.out.println(avgFPS);
     }
 
     @Override
