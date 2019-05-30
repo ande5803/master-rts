@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 800;
 		config.height = 600;
-		config.foregroundFPS = 60;
+		config.foregroundFPS = 0;
 		new LwjglApplication(new NautilusGame(), config);
 	}
 }
